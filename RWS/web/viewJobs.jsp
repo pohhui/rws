@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="entity.Job"%>
+<%@page import="dao.JobDAO"%>
 <!DOCTYPE html>
 <%@include file = "protect.jsp"%>
 <html>
@@ -79,23 +82,23 @@
                                                 * js-sorter-desc => desending sorter trigger
                                                 -->
                                                 <tr>
-                                                    <th>Name
+                                                    <th>Job Opening
                                                         <span class="js-sorter-desc     glyphicon glyphicon-chevron-down pull-right"></span>
                                                         <span class="js-sorter-asc     glyphicon glyphicon-chevron-up pull-right"></span>
                                                     </th>
-                                                    <th>Email
+                                                    <th>JobID #
                                                         <span class="js-sorter-desc     glyphicon glyphicon-chevron-down pull-right"></span>
                                                         <span class="js-sorter-asc     glyphicon glyphicon-chevron-up pull-right"></span>
                                                     </th>
-                                                    <th>Age
+                                                    <th>Type
                                                         <span class="js-sorter-desc     glyphicon glyphicon-chevron-down pull-right"></span>
                                                         <span class="js-sorter-asc     glyphicon glyphicon-chevron-up pull-right"></span>
                                                     </th>
-                                                    <th>Account
+                                                    <th>Area of Interest
                                                         <span class="js-sorter-desc     glyphicon glyphicon-chevron-down pull-right"></span>
                                                         <span class="js-sorter-asc     glyphicon glyphicon-chevron-up pull-right"></span>
                                                     </th>
-                                                    <th>Scoring
+                                                    <th>Created On
                                                         <span class="js-sorter-desc     glyphicon glyphicon-chevron-down pull-right"></span>
                                                         <span class="js-sorter-asc     glyphicon glyphicon-chevron-up pull-right"></span>
                                                     </th>
@@ -125,49 +128,27 @@
 
                                             <!-- table body -->
                                             <tbody>
+                                                <%                                                   
+                                                    JobDAO jobDAO = new JobDAO();
+                                                    ArrayList<Job> jobList = jobDAO.retrieveAll();
+                                                %>
+                                                <%
+                                                    for (int i = 0; i < jobList.size(); i++) {
+                                                        Job job = jobList.get(i);
+                                                %>   
                                                 <tr>
-                                                    <td>Freddy Krueger</td>
-                                                    <td>freddy.krueger@sample.com</td>
-                                                    <td class="text-right">122</td>
-                                                    <td class="text-right">2300$</td>
-                                                    <td class="text-right">+15</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Clint Eastwood</td>
-                                                    <td>clint.eastwood@sample.com</td>
-                                                    <td class="text-right">62</td>
-                                                    <td class="text-right">48 500$</td>
-                                                    <td class="text-right">+12</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Peter Parker</td>
-                                                    <td>peter.parker@dynamitable.com</td>
-                                                    <td class="text-right">22</td>
-                                                    <td class="text-right">210$</td>
-                                                    <td class="text-right">-5</td>
-                                                </tr>  
-                                                <tr>
-                                                    <td>Bruce Wayne</td> 
-                                                    <td>bruce.wayne@dynamitable.com</td>                  
-                                                    <td class="text-right">42</td>  
-                                                    <td class="text-right">-8500$</td>         
-                                                    <td class="text-right">+2</td>                        
-                                                </tr>
-                                                <tr>
-                                                    <td>Jackie Chan</td>
-                                                    <td>jackie.chan@sample.com</td>
-                                                    <td class="text-right">32</td>
-                                                    <td class="text-right">-250.55$</td>
-                                                    <td class="text-right">0</td>  
+                                                    <td><%=job.getPostingTitle()%></td>
+                                                    <td><%=job.getJobId()%></td>
+                                                    <td><%=job.getEmploymentType()%></td>
+                                                    <td><%=job.getAreaOfInterest()%></td>
+                                                    <td><%=job.getCreatedOn()%></td>
+
                                                 </tr>
 
-                                                <tr>
-                                                    <td>Bruce Lee</td>
-                                                    <td>bruce.lee@sample.com</td>
-                                                    <td class="text-right">32</td>
-                                                    <td class="text-right">510$</td>
-                                                    <td class="text-right">-7</td> 
-                                                </tr>
+                                                <%
+                                                    }
+                                                %>
+
 
                                             </tbody>
 

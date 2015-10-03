@@ -5,11 +5,13 @@
  */
 package dao;
 
+import entity.Job;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -63,16 +65,17 @@ public class JobDAO {
         }
     }
 
-    public static void retrieve() {
+    public static ArrayList<Job> retrieveAll() {
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
+        ArrayList<Job> jobList = new ArrayList<Job>();
 
         try {
             conn = ConnectionManager.getConnection();
             stmt = conn.createStatement();
 
-            rs = stmt.executeQuery("select * from user;");
+            rs = stmt.executeQuery("select * from job;");
             while (rs != null && rs.next()) {
                 int jobID = rs.getInt(1);
                 String jobOpeningType = rs.getString(2);
@@ -81,7 +84,7 @@ public class JobDAO {
                 String postingTitle = rs.getString(5);
                 String createdBy = rs.getString(6);
                 String createdOn = rs.getString(7);
-                String targetOpenings = rs.getString(8);
+                int targetOpenings = rs.getInt(8);
                 int availableOpenings = rs.getInt(9);
                 String costCentre = rs.getString(10);
                 String company = rs.getString(11);
@@ -93,7 +96,7 @@ public class JobDAO {
                 String shift = rs.getString(17);
                 int hours = rs.getInt(18);
                 String frequency = rs.getString(19);
-                String visible = rs.getString(20); //this one is in char
+                String visible = rs.getString(20); 
                 String descriptionType = rs.getString(21);
                 String description = rs.getString(22);
                 String destination = rs.getString(23);
@@ -102,8 +105,8 @@ public class JobDAO {
                 int recruiterID = rs.getInt(26);
                 String recruiterName = rs.getString(27);
                 
-                
-                
+                Job jobPost = new Job(jobID, jobOpeningType,businessUnit, job, postingTitle, createdBy, createdOn, targetOpenings, availableOpenings, costCentre, company, department, location, areaOfInterest, scheduleType, employmentType, shift, hours, frequency, visible, descriptionType, description, destination, postingType, relativeOpeningDate, recruiterID, recruiterName);
+                jobList.add(jobPost);
 
             }
 
@@ -112,5 +115,6 @@ public class JobDAO {
         } finally {
             ConnectionManager.close(conn, stmt, rs);
         }
+        return jobList;
     }
 }
