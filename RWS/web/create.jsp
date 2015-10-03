@@ -51,7 +51,7 @@
                         <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#userMenu">Modules <i class="fa fa-chevron-down"></i></a>
                             <ul class="nav nav-stacked collapse in" id="userMenu">
                                 <li><a href="create.jsp"><i class="glyphicon glyphicon-plus"></i>&nbsp; Create Job</a></li>
-                                <li><a href="#"><i class="glyphicon glyphicon-briefcase"></i>&nbsp; Manage Jobs </a></li>
+                                <li><a href="viewJobs.jsp"><i class="glyphicon glyphicon-briefcase"></i>&nbsp; Manage Jobs </a></li>
                             </ul>
                         </li>    
                     </ul>
