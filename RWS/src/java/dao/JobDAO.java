@@ -9,23 +9,25 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
  * @author andrew.lim.2013
  */
 public class JobDAO {
+
     public static void create(String jobOpeningType, String businessUnit, String job, String postingTitle, String createdBy, String createdOn, int targetOpenings, int availableOpenings, String costCenter, String company, String department, String location, String areaOfInterest, String scheduleType, String employmentType, String shift, int hours, String frequency, String visible, String descriptionType, String description, String destination, String postingType, String relativeOpeningDate, int recruiterID, String recruiterName) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         String query = "INSERT INTO JOB (jobOpeningType,businessUnit,job,postingTitle,createdBy,createdOn,targetOpenings,availableOpenings,costCenter,company,department,location,areaOfInterest,scheduleType,employmentType,shift,hours,frequency,visible,descriptionType,description,destination,postingType,relativeOpeningDate,recruiterID,recruiterName) "
                 + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
-        
+
         try {
             conn = ConnectionManager.getConnection();
             stmt = conn.prepareStatement(query);
-            
+
             stmt.setString(1, jobOpeningType);
             stmt.setString(2, businessUnit);
             stmt.setString(3, job);
@@ -51,9 +53,60 @@ public class JobDAO {
             stmt.setString(23, postingType);
             stmt.setString(24, relativeOpeningDate);
             stmt.setInt(25, recruiterID);
-            stmt.setString(26, recruiterName);           
-            
+            stmt.setString(26, recruiterName);
+
             stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            ConnectionManager.close(conn, stmt, rs);
+        }
+    }
+
+    public static void retrieve() {
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = ConnectionManager.getConnection();
+            stmt = conn.createStatement();
+
+            rs = stmt.executeQuery("select * from user;");
+            while (rs != null && rs.next()) {
+                int jobID = rs.getInt(1);
+                String jobOpeningType = rs.getString(2);
+                String businessUnit = rs.getString(3);
+                String job = rs.getString(4);
+                String postingTitle = rs.getString(5);
+                String createdBy = rs.getString(6);
+                String createdOn = rs.getString(7);
+                String targetOpenings = rs.getString(8);
+                int availableOpenings = rs.getInt(9);
+                String costCentre = rs.getString(10);
+                String company = rs.getString(11);
+                String department = rs.getString(12);
+                String location = rs.getString(13);
+                String areaOfInterest = rs.getString(14);
+                String scheduleType = rs.getString(15);
+                String employmentType = rs.getString (16);
+                String shift = rs.getString(17);
+                int hours = rs.getInt(18);
+                String frequency = rs.getString(19);
+                String visible = rs.getString(20); //this one is in char
+                String descriptionType = rs.getString(21);
+                String description = rs.getString(22);
+                String destination = rs.getString(23);
+                String postingType = rs.getString(24);
+                String relativeOpeningDate = rs.getString(25);
+                int recruiterID = rs.getInt(26);
+                String recruiterName = rs.getString(27);
+                
+                
+                
+
+            }
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
