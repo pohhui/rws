@@ -52,60 +52,24 @@
                         </li>    
                     </ul>
                 </div>  
-                <div class="col-sm-9">
-                    <div class="row">
-                        <!-- center left-->
-                        <div class="col-md-4">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4>Jobs Occupied</h4></div>
-                                <div class="panel-body">
-                                    <div class="chart-demo" style="margin-left: 30px; margin-top: 10px;">
-                                        <canvas id="doughnutChart" width="200" height="200"></canvas>
-                                    </div>
-                                </div>
-                                <!--/panel-body-->
-                            </div>
-                            <!--/panel-->
-                        </div>
-                        <div class="col-md-4">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4>Job Type</h4></div>
-                                <div class="panel-body">
-                                    <div class="chart-demo" style="margin-left: 30px; margin-top: 10px;">
-                                        <canvas id="radarChart" width="200" height="200"></canvas>
-                                    </div>
-                                </div>
-                                <!--/panel-body-->
-                            </div>
-                            <!--/panel-->
-                        </div>
-                        <div class="col-md-4">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4>Monthly Report</h4></div>
-                                <div class="panel-body">
-                                    <div class="chart-demo" style="margin-left: 30px; margin-top: 10px;">
-                                        <canvas id="barChart" width="200" height="200"></canvas>
-                                    </div>
-                                </div>
-                                <!--/panel-body-->
-                            </div>
-                            <!--/panel-->
-                        </div>
-                    </div>
+                <!-- Start of listing applicants -->
+
+                <div class="text-left">
+                    <h1>Job Opening</h1>
+                    <br>
+                   
+
+
                 </div>
             </div>
-        </div>
 
-        <%@include file = "logoutModal.jsp"%>
-        <!-- /Main -->        
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/bootstrap-notify.min.js"></script>
-        <script src="js/Chart.min.js"></script>
-        <script src="js/scripts.js"></script>
-        <script src="js/charts.js"></script>        
+            <%@include file = "logoutModal.jsp"%>
+            <!-- /Main -->        
+            <script src="js/jquery.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/bootstrap-notify.min.js"></script>
+            <script src="js/Chart.min.js"></script>
+            <script src="js/scripts.js"></script>
+            <script src="js/charts.js"></script>    
     </body>
 </html>
