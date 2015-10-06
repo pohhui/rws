@@ -119,7 +119,7 @@ $(document).ready(function () {
     $('#costCenterAutocomplete .typeahead').typeahead({
         hint: true,
         highlight: true,
-        minLength: 1
+        
     },
     {
         name: 'costCenter',
