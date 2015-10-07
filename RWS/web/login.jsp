@@ -1,9 +1,3 @@
-<%-- 
-    Document   : login
-    Created on : Sep 18, 2015, 4:15:40 PM
-    Author     : andrew.lim.2013
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

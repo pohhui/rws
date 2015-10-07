@@ -143,7 +143,7 @@
                                                     <%
                                                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                                                         dateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Singapore"));
-                                                        Date date = new Date();                                                        
+                                                        Date date = new Date();
                                                         String today = dateFormat.format(date);
                                                     %>
                                                     <input style="background-color: lightgoldenrodyellow; cursor: not-allowed;" type="text" name="createdOn" class="form-control" value="<%=today%>" readonly=readonly>
@@ -361,19 +361,20 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <%@include file = "createModal.jsp"%>
                         </form>
                     </div>
                 </div>
             </div>
-            
+
             <%@include file = "logoutModal.jsp"%>
             <!-- /Main -->        
             <script src="js/jquery.min.js"></script>
             <script src="js/bootstrap.min.js"></script>
             <script src="js/typeahead.min.js"></script>
             <script src="js/scripts.js"></script>    
-            <script src="js/createScript.js"></script>   
+            <script src="js/createScript.js"></script>  
+        </div>
     </body>
 </html>

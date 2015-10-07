@@ -16,10 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author andrew.lim.2013
- */
 @WebServlet(name = "CreateJobServlet", urlPatterns = {"/create.do"})
 public class CreateJobServlet extends HttpServlet {
 
@@ -83,7 +79,7 @@ public class CreateJobServlet extends HttpServlet {
         JobDAO.create(jobOpeningType, businessUnit, job, postingTitle, createdBy, createdOn, targetOpenings, availableOpenings, costCenter, company, department, location, areaOfInterest, scheduleType, employmentType, shift, hours, frequency, visible, descriptionType, description, destination, postingType, relativeOpeningDate, recruiterID, recruiterName);
 
         //redirect user
-        response.sendRedirect("home.jsp");
+        response.sendRedirect("viewJobs.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

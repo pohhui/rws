@@ -1,3 +1,6 @@
+<%@page import="dao.ApplicationDAO"%>
+<%@page import="entity.Application"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="entity.Job"%>
 <%@page import="dao.JobDAO"%>
 <!DOCTYPE html>
@@ -8,6 +11,7 @@
 
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/jquery.dataTables.min.css" rel="stylesheet">
         <link href="css/site.css" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Roboto:400,100' rel='stylesheet' type='text/css'>
     </head>
@@ -41,6 +45,11 @@
         </div>
         <!-- /Header -->
 
+        <%            
+            int jobId = Integer.parseInt(request.getParameter("id"));
+            Job job = JobDAO.retrieveJobById(jobId);
+            ArrayList<Application> applicationList = ApplicationDAO.retrieveByJobID(jobId);
+        %>
         <!-- Main -->
         <div class="container-fluid">
             <div class="row">
@@ -58,28 +67,20 @@
                 <div class="col-sm-9">
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#home">Job Details</a></li>
-                        <li><a data-toggle="tab" href="#menu1">Applications</a></li>
+                        <li><a data-toggle="tab" href="#menu1">Applications &nbsp;<span class="badge badge-notify"><%=applicationList.size()%></span></a></li>
                     </ul>
-                    <%                                
-                        int jobId = Integer.parseInt(request.getParameter("id"));
-                        JobDAO jobDAO = new JobDAO();
-                        Job job = jobDAO.retrieveJobById(jobId);
-                    %>
                     <div class="tab-content">
                         <div id="home" class="tab-pane fade in active">
                             <div class="text-left">
                                 <div class="container-fluid">
                                     <div class="row">
-                                        <div class="col-md-6"><h2>Job Opening</h2></div>
-                                        <div class="col-md-6">
+                                        <div>
                                             <div class="text-right">
                                                 <a class="btn btn-default" href="create.jsp" role="button">Create New</a>
                                                 <a class="btn btn-default" href="edit.jsp?id=<%=jobId%>" role="button">Edit Job Post</a>
                                             </div>
                                         </div>
                                     </div>
-
-
                                     <div class="row">
                                         <div class="col-md-6"><b>Posting Title</b>: &nbsp; <%=job.getPostingTitle()%></div>
                                         <div class="col-md-6"><b>Job Opening ID</b>: &nbsp; <%=job.getJobId()%></div>
@@ -114,7 +115,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6"><b>Area of Interest</b>: &nbsp; <%=job.getAreaOfInterest()%></div>
-                                         <div class="col-md-6"><b>Relative Opening Date</b>: &nbsp; <%=job.getRelativeOpeningDate()%></div>
+                                        <div class="col-md-6"><b>Relative Opening Date</b>: &nbsp; <%=job.getRelativeOpeningDate()%></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6"><b>Employment Type</b>: &nbsp; <%=job.getEmploymentType()%></div>
@@ -136,32 +137,82 @@
                                         <div class="col-md-6"><b>Recruiter ID</b>: &nbsp; <%=job.getRecruiterID()%></div>
                                         <div class="col-md-6"><b>Recruiter</b>: &nbsp; <%=job.getRecruiterName()%></div>
                                     </div>
-
-
-
-
+                                    <div class="row">
+                                        <div>
+                                            <div class="text-right">
+                                                <a class="btn btn-default" href="viewJobs.jsp" role="button">Back</a>                                                
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-
                             </div>
                         </div>
                         <div id="menu1" class="tab-pane fade">
-                            <h3>Insert table of applicants here</h3>
+                            <div>
+                                <form action="download.do" method="post">
+                                    <%
+                                        if (!applicationList.isEmpty()) {
+                                    %>                                    
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="text-right">
+                                                <button id="select-all" type="button" class="btn btn-danger col-sm-offset-4" style="margin-bottom: 10px;">Select All &nbsp;<i class="fa fa-check"></i></button>
+                                                <button id="download-button" disabled="disabled" data-toggle="modal" data-target="#downloadCVModal" type="button" class="btn btn-success" style="margin-bottom: 10px;">Download &nbsp;<i class="fa fa-download"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%
+                                        }
+                                    %>
+                                    <table class="table table-hover" id="applicationsTable" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Applicant Name</th>
+                                                <th>Position Applied</th>
+                                                <th>Nationality</th>
+                                                <th>Date Applied</th>
+                                                <th>Select</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <%
+                                                for (int i = 0; i < applicationList.size(); i++) {
+                                                    Application app = applicationList.get(i);
+                                            %>   
+                                            <tr>
+                                                <td><%=app.getSurname() + " " + app.getMiddleName() + ", " + app.getGivenName()%></td>
+                                                <td><%=app.getPosition()%></td>
+                                                <td><%=app.getNationality()%></td>
+                                                <td><%=app.getApplicationDate()%></td>        
+                                                <td><input type="checkbox" name="download" value="<%=app.getAppID()%>"/></td>
+                                            </tr>
+                                            <%
+                                                }
+                                            %>
+                                        </tbody>
+                                    </table> 
 
+                                    <%@include file = "downloadCVModal.jsp"%>
+                                </form>                            
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="text-right">
+                                        <a class="btn btn-default" href="viewJobs.jsp" role="button">Back</a>                                                
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>  
-
-
                 </div>
             </div>
-
 
             <%@include file = "logoutModal.jsp"%>
             <!-- /Main -->        
             <script src="js/jquery.min.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-            <script src="js/bootstrap-notify.min.js"></script>
-            <script src="js/Chart.min.js"></script>
-            <script src="js/scripts.js"></script>
-            <script src="js/charts.js"></script>    
+            <script src="js/jquery.dataTables.min.js"></script>
+            <script src="js/scripts.js"></script>          
+            <script src="js/viewJobScript.js"></script>
+        </div>
     </body>
 </html>

@@ -13,10 +13,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-/**
- *
- * @author andrew.lim.2013
- */
 public class JobDAO {
 
     public static void create(String jobOpeningType, String businessUnit, String job, String postingTitle, String createdBy, String createdOn, int targetOpenings, int availableOpenings, String costCenter, String company, String department, String location, String areaOfInterest, String scheduleType, String employmentType, String shift, int hours, String frequency, String visible, String descriptionType, String description, String destination, String postingType, String relativeOpeningDate, int recruiterID, String recruiterName) {

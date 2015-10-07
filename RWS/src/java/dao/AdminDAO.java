@@ -11,10 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- *
- * @author andrew.lim.2013
- */
 public class AdminDAO {
     public static Admin retrieve(String id) {
         Admin admin = null;

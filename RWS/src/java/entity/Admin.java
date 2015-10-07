@@ -5,10 +5,6 @@
  */
 package entity;
 
-/**
- *
- * @author andrew.lim.2013
- */
 public class Admin {
     private String id;
     private String password;

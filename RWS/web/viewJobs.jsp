@@ -8,10 +8,10 @@
         <title>Admin Dashboard</title>
 
         <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/font-awesome.min.css" rel="stylesheet">
-        <link href="css/site.css" rel="stylesheet">
-        <link href='https://fonts.googleapis.com/css?family=Roboto:400,100' rel='stylesheet' type='text/css'>
+        <link href="css/font-awesome.min.css" rel="stylesheet">  
         <link href="css/jquery.dataTables.min.css" rel="stylesheet">
+        <link href="css/site.css" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,100' rel='stylesheet' type='text/css'>   
     </head>
     <body>
         <!--page load-->
@@ -64,13 +64,12 @@
 
                     <div class="tab-content">
                         <div id="home" class="tab-pane fade in active">
-                            <h2>Jobs Assigned To Me</h2>
                             <br>
                             <table id="example" class="display" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Job Opening</th>
                                         <th>Job ID</th>
+                                        <th>Job Opening</th>                                        
                                         <th>Type</th>
                                         <th>Area of Interest</th>
                                         <th>Created On</th>
@@ -88,13 +87,13 @@
                                         for (int i = 0; i < jobList.size(); i++) {
                                             Job job = jobList.get(i);
                                     %>   
-                                    <tr class="clickable-row" data-href="viewApplicants.jsp">
-                                        <td><%=job.getPostingTitle()%></td>
+                                    <tr>
                                         <td><%=job.getJobId()%></td>
+                                        <td><%=job.getPostingTitle()%></td>                                        
                                         <td><%=job.getEmploymentType()%></td>
                                         <td><%=job.getAreaOfInterest()%></td>
                                         <td><%=job.getCreatedOn()%></td>        
-                                        <td><a href="viewApplicants.jsp?id=<%=job.getJobId()%>"> <button class="btn btn-default">View Details</button></a></td>
+                                        <td class="text-center"><a href="viewJob.jsp?id=<%=job.getJobId()%>"> <button class="btn btn-default">View Details</button></a></td>
 
                                     </tr>
 
@@ -107,13 +106,12 @@
                             </table>
                         </div>
                         <div id="menu1" class="tab-pane fade">
-                            <h2>All Jobs</h2>
                             <br>
                             <table id="example1" class="display" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Job Opening</th>
                                         <th>Job ID</th>
+                                        <th>Job Opening</th>
                                         <th>Type</th>
                                         <th>Area of Interest</th>
                                         <th>Created On</th>
@@ -127,14 +125,13 @@
                                         for (int i = 0; i < allJobs.size(); i++) {
                                             Job jobs = allJobs.get(i);
                                     %>   
-                                    <tr class="clickable-row" data-href="viewApplicants.jsp">
-                                        <td><%=jobs.getPostingTitle()%></td>
+                                    <tr>
                                         <td><%=jobs.getJobId()%></td>
+                                        <td><%=jobs.getPostingTitle()%></td>
                                         <td><%=jobs.getEmploymentType()%></td>
                                         <td><%=jobs.getAreaOfInterest()%></td>
                                         <td><%=jobs.getCreatedOn()%></td>        
-                                        <td><a href="viewApplicants.jsp?id=<%=jobs.getJobId()%>"> <button class="btn btn-default">View Details</button></a></td>
-
+                                        <td class="text-center"><a href="viewJob.jsp?id=<%=jobs.getJobId()%>"> <button class="btn btn-default">View Details</button></a></td>
                                     </tr>
 
                                     <%
@@ -153,16 +150,9 @@
         <%@include file = "logoutModal.jsp"%>
         <!-- /Main -->        
         <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.dataTables.min.js"></script>
         <script src="js/scripts.js"></script>  
         <script src="js/viewJobsScript.js"></script> 
-        <script src="js/dynamitable.jquery.min.js"></script>
-        <script src="js/jquery.dataTables.min.js"></script>
         <script src="js/tableJobs.js"></script>
-
-
-
-
-
     </body>
 </html>

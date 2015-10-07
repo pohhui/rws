@@ -3,7 +3,7 @@ $(document).ready(function () {
         $(".loader").fadeOut(1000);        
     })
 
-    $(".alert").addClass("in").fadeOut(4500);
+    //$(".alert").addClass("in").fadeOut(4500);
 
     /* swap open/close side menu icons */
     $('[data-toggle=collapse]').click(function () {

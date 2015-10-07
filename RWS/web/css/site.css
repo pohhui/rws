@@ -111,3 +111,9 @@ i {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.badge-notify {
+    background:red;
+    position:relative;
+    top: -2px;
+}
