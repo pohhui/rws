@@ -122,10 +122,10 @@
                                                 <label class="col-sm-4 control-label">Business Unit</label>
                                                 <div class="col-sm-8">
                                                     <select name="businessUnit" class="form-control">
-                                                        <option value="Attractions">Attractions</option>
-                                                        <option value="Hotel & Spa">Hotel & Spa</option>
-                                                        <option value="Restaurants">Restaurants</option>
-                                                        <option value="Casino">Casino</option>
+                                                        <option value="Attractions" <%if (job.getBusinessUnit().equals("Attractions")) {%>selected<%}%>>Attractions</option>
+                                                        <option value="Hotel & Spa" <%if (job.getBusinessUnit().equals("Hotel & Spa")) {%>selected<%}%>>Hotel & Spa</option>
+                                                        <option value="Restaurants" <%if (job.getBusinessUnit().equals("Restaurants")) {%>selected<%}%>>Restaurants</option>
+                                                        <option value="Casino" <%if (job.getBusinessUnit().equals("Casino")) {%>selected<%}%>>Casino</option>
                                                     </select>
                                                 </div>
                                             </div>
