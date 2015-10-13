@@ -146,7 +146,7 @@
                                                 <th>Nationality ID Type</th>
                                                 <th>Application Status</th>
                                                 <th>Gender</th>
-                                                <th>Address</th>
+                                                <th>Postal Code</th>
                                                 <th>Date Applied</th>
                                                 <th>Select</th>
                                             </tr>
