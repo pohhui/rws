@@ -45,8 +45,7 @@
         </div>
         <!-- /Header -->
 
-        <%            
-            int jobId = Integer.parseInt(request.getParameter("id"));
+        <%            int jobId = Integer.parseInt(request.getParameter("id"));
             Job job = JobDAO.retrieveJobById(jobId);
             ArrayList<Application> applicationList = ApplicationDAO.retrieveByJobID(jobId);
         %>
@@ -81,72 +80,47 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6"><b>Posting Title</b>: &nbsp; <%=job.getPostingTitle()%></div>
-                                        <div class="col-md-6"><b>Job Opening ID</b>: &nbsp; <%=job.getJobId()%></div>
+
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Job Details</div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-md-6"><b>Job Opening ID</b>: &nbsp; <%=job.getJobId()%></div>
+                                                <div class="col-md-6"><b>Posting Title</b>: &nbsp; <%=job.getPostingTitle()%></div>
+                                            </div> 
+                                            <div class="row">
+                                                <div class="col-md-6"><b>Business Unit</b>: &nbsp; <%=job.getBusinessUnit()%></div>
+                                                <div class="col-md-6"><b>Location</b>: &nbsp; <%=job.getLocation()%></div>
+                                            </div> 
+                                            <div class="row">
+                                                <div class="col-md-6"><b>Created By</b>: &nbsp; <%=job.getCreatedBy()%></div>
+                                                <div class="col-md-6"><b>Created On</b>: &nbsp; <%=job.getCreatedOn()%></div>
+                                            </div> 
+                                            <div class="row">
+                                                <div class="col-md-6"><b>Status</b>: &nbsp; <%=job.getStatusCode()%></div>
+                                                <div class="col-md-6"><b>Employment Type</b>: &nbsp; <%=job.getEmploymentType()%></div>
+                                            </div> 
+                                            <div class="row">
+                                                <div class="col-md-6"><b>Shift</b>: &nbsp; <%=job.getShift()%></div>
+                                                <div class="col-md-6"><b>Validity</b>: &nbsp; <%=job.getValidity()%></div>
+                                            </div> 
+                                            <div class="row">
+                                                <div class="col-md-6"><b>Description</b>: &nbsp; <%=job.getDescription()%></div>
+                                                <div class="col-md-6"><b>Requirement</b>: &nbsp; <%=job.getRequirement()%></div>
+                                            </div> 
+                                        </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6"><b>Job Opening Status</b>: &nbsp; (To be inserted)</div>
-                                        <div class="col-md-6"><b>Job Type</b>: &nbsp; <%=job.getScheduleType()%></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6"><b>Job Title</b>: &nbsp; <%=job.getJob()%></div>
-                                        <div class="col-md-6"><b>Job Code</b>: &nbsp; <%=job.getDepartment()%></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6"><b>Business Unit</b>: &nbsp; <%=job.getBusinessUnit()%></div>
-                                        <div class="col-md-6"><b>Created By</b>: &nbsp; <%=job.getCreatedBy()%></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6"><b>Target Openings</b>: &nbsp; <%=job.getTargetOpenings()%></div>
-                                        <div class="col-md-6"><b>Created On</b>: &nbsp; <%=job.getCreatedOn()%></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6"><b>Available Openings</b>: &nbsp; <%=job.getAvailableOpenings()%></div>
-                                        <div class="col-md-6"><b>Posting Type</b>: &nbsp; <%=job.getPostingType()%></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6"><b>Cost Centre</b>: &nbsp; <%=job.getCostCenter()%></div>
-                                        <div class="col-md-6"><b>Company</b>: &nbsp; <%=job.getCompany()%></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6"><b>Department</b>: &nbsp; <%=job.getDepartment()%></div>
-                                        <div class="col-md-6"><b>Location</b>: &nbsp; <%=job.getLocation()%></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6"><b>Area of Interest</b>: &nbsp; <%=job.getAreaOfInterest()%></div>
-                                        <div class="col-md-6"><b>Relative Opening Date</b>: &nbsp; <%=job.getRelativeOpeningDate()%></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6"><b>Employment Type</b>: &nbsp; <%=job.getEmploymentType()%></div>
-                                        <div class="col-md-6"><b>Shift</b>: &nbsp; <%=job.getShift()%></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6"><b>Hours</b>: &nbsp; <%=job.getHours()%></div>
-                                        <div class="col-md-6"><b>Frequency</b>: &nbsp; <%=job.getFrequency()%></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6"><b>Visible</b>: &nbsp; <%=job.getVisible()%></div>
-                                        <div class="col-md-6"><b>Description Type</b>: &nbsp; <%=job.getDescriptionType()%></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6"><b>Destination</b>: &nbsp; <%=job.getDestination()%></div>
-                                        <div class="col-md-6"><b>Description</b>: &nbsp; <%=job.getDescription()%></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6"><b>Recruiter ID</b>: &nbsp; <%=job.getRecruiterID()%></div>
-                                        <div class="col-md-6"><b>Recruiter</b>: &nbsp; <%=job.getRecruiterName()%></div>
-                                    </div>
-                                    <div class="row">
-                                        <div>
-                                            <div class="text-right">
-                                                <a class="btn btn-default" href="viewJobs.jsp" role="button">Back</a>                                                
-                                            </div>
+                                </div>
+                                <div class="row">
+                                    <div>
+                                        <div class="text-right">
+                                            <a class="btn btn-default" href="viewJobs.jsp" role="button">Back</a>                                                
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         <div id="menu1" class="tab-pane fade">
                             <div>
                                 <form action="download.do" method="post">
@@ -167,9 +141,12 @@
                                     <table class="table table-hover" id="applicationsTable" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-                                                <th>Applicant Name</th>
-                                                <th>Position Applied</th>
-                                                <th>Nationality</th>
+                                                <th>Applicant</th>
+                                                <th>Date of Birth</th>
+                                                <th>Nationality ID Type</th>
+                                                <th>Application Status</th>
+                                                <th>Gender</th>
+                                                <th>Address</th>
                                                 <th>Date Applied</th>
                                                 <th>Select</th>
                                             </tr>
@@ -180,10 +157,14 @@
                                                     Application app = applicationList.get(i);
                                             %>   
                                             <tr>
-                                                <td><%=app.getSurname() + " " + app.getMiddleName() + ", " + app.getGivenName()%></td>
-                                                <td><%=app.getPosition()%></td>
-                                                <td><%=app.getNationality()%></td>
-                                                <td><%=app.getApplicationDate()%></td>        
+                                                <td><%=app.getFullname()%></td>
+                                                <td><%=app.getDob()%></td>
+                                                <td><%=app.getNricType()%></td>
+                                                <td><%=app.getStatus()%></td> 
+                                                <td><%=app.getGender()%></td> 
+                                                <td><%=app.getPostalCode()%></td> 
+                                                <td><%=app.getDateApplied()%></td> 
+
                                                 <td><input type="checkbox" name="download" value="<%=app.getAppID()%>"/></td>
                                             </tr>
                                             <%
@@ -195,6 +176,7 @@
                                     <%@include file = "downloadCVModal.jsp"%>
                                 </form>                            
                             </div>
+
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="text-right">
@@ -203,16 +185,17 @@
                                 </div>
                             </div>
                         </div>
-                    </div>  
-                </div>
+                    </div>
+                </div>  
             </div>
-
-            <%@include file = "logoutModal.jsp"%>
-            <!-- /Main -->        
-            <script src="js/jquery.min.js"></script>
-            <script src="js/jquery.dataTables.min.js"></script>
-            <script src="js/scripts.js"></script>          
-            <script src="js/viewJobScript.js"></script>
         </div>
-    </body>
+
+        <%@include file = "logoutModal.jsp"%>
+        <!-- /Main -->        
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.dataTables.min.js"></script>
+        <script src="js/scripts.js"></script>          
+        <script src="js/viewJobScript.js"></script>
+    </div>
+</body>
 </html>

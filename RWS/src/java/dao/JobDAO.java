@@ -15,43 +15,29 @@ import java.util.ArrayList;
 
 public class JobDAO {
 
-    public static void create(String jobOpeningType, String businessUnit, String job, String postingTitle, String createdBy, String createdOn, int targetOpenings, int availableOpenings, String costCenter, String company, String department, String location, String areaOfInterest, String scheduleType, String employmentType, String shift, int hours, String frequency, String visible, String descriptionType, String description, String destination, String postingType, String relativeOpeningDate, int recruiterID, String recruiterName) {
+    public static void create(String businessUnit, String postingTitle, String createdBy, String createdOn, String statusCode, String location, String employmentType, String shift, String description, String requirement, String validity) {
+
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        String query = "INSERT INTO JOB (jobOpeningType,businessUnit,job,postingTitle,createdBy,createdOn,targetOpenings,availableOpenings,costCenter,company,department,location,areaOfInterest,scheduleType,employmentType,shift,hours,frequency,visible,descriptionType,description,destination,postingType,relativeOpeningDate,recruiterID,recruiterName) "
-                + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+        String query = "INSERT INTO JOB (businessUnit, postingTitle, createdBy, createdOn, statusCode, location, employmentType, shift, description, requirement, validity)"
+                + "VALUES (?,?,?,?,?,?,?,?,?,?,?);";
 
         try {
             conn = ConnectionManager.getConnection();
             stmt = conn.prepareStatement(query);
 
-            stmt.setString(1, jobOpeningType);
-            stmt.setString(2, businessUnit);
-            stmt.setString(3, job);
-            stmt.setString(4, postingTitle);
-            stmt.setString(5, createdBy);
-            stmt.setString(6, createdOn);
-            stmt.setInt(7, targetOpenings);
-            stmt.setInt(8, availableOpenings);
-            stmt.setString(9, costCenter);
-            stmt.setString(10, company);
-            stmt.setString(11, department);
-            stmt.setString(12, location);
-            stmt.setString(13, areaOfInterest);
-            stmt.setString(14, scheduleType);
-            stmt.setString(15, employmentType);
-            stmt.setString(16, shift);
-            stmt.setInt(17, hours);
-            stmt.setString(18, frequency);
-            stmt.setString(19, visible);
-            stmt.setString(20, descriptionType);
-            stmt.setString(21, description);
-            stmt.setString(22, destination);
-            stmt.setString(23, postingType);
-            stmt.setString(24, relativeOpeningDate);
-            stmt.setInt(25, recruiterID);
-            stmt.setString(26, recruiterName);
+            stmt.setString(1, businessUnit);
+            stmt.setString(2, postingTitle);
+            stmt.setString(3, createdBy);
+            stmt.setString(4, createdOn);
+            stmt.setString(5, statusCode);
+            stmt.setString(6, location);
+            stmt.setString(7, employmentType);
+            stmt.setString(8, shift);
+            stmt.setString(9, description);
+            stmt.setString(10, requirement);
+            stmt.setString(11, validity);
 
             stmt.executeUpdate();
         } catch (SQLException ex) {
@@ -61,42 +47,26 @@ public class JobDAO {
         }
     }
 
-    public static void update(String jobOpeningType, String businessUnit, String job, String postingTitle, String createdBy, String createdOn, int targetOpenings, int availableOpenings, String costCenter, String company, String department, String location, String areaOfInterest, String scheduleType, String employmentType, String shift, int hours, String frequency, String visible, String descriptionType, String description, String destination, String postingType, String relativeOpeningDate, int recruiterID, String recruiterName) {
+    public static void update(int jobID, String businessUnit, String postingTitle, String createdBy, String createdOn, String location, String employmentType, String shift, String description, String requirement, String validity) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        String query = "UPDATE job SET jobOpeningType = ?,businessUnit = ?, job = ?,postingTitle = ?,createdBy = ?,createdOn = ?,targetOpenings = ?,availableOpenings = ?,costCenter =?,company = ?,department = ?,location = ?,areaOfInterest = ?,scheduleType = ?,employmentType = ?,shift = ?,hours = ?,frequency = ?,visible = ?,descriptionType = ?,description = ?,destination = ?,postingType = ?,relativeOpeningDate = ?,recruiterID = ?,recruiterName = ? WHERE job = ?;";
+        String query = "UPDATE job SET businessUnit = ?, job = ?,postingTitle = ?,createdBy = ?,createdOn = ?, location = ?,employmentType = ?, shift = ?, description = ?, requirement = ?, validity = ? WHERE jobID = ?;";
         try {
             conn = ConnectionManager.getConnection();
             stmt = conn.prepareStatement(query);
 
-            stmt.setString(1, jobOpeningType);
-            stmt.setString(2, businessUnit);
-            stmt.setString(3, job);
-            stmt.setString(4, postingTitle);
-            stmt.setString(5, createdBy);
-            stmt.setString(6, createdOn);
-            stmt.setInt(7, targetOpenings);
-            stmt.setInt(8, availableOpenings);
-            stmt.setString(9, costCenter);
-            stmt.setString(10, company);
-            stmt.setString(11, department);
-            stmt.setString(12, location);
-            stmt.setString(13, areaOfInterest);
-            stmt.setString(14, scheduleType);
-            stmt.setString(15, employmentType);
-            stmt.setString(16, shift);
-            stmt.setInt(17, hours);
-            stmt.setString(18, frequency);
-            stmt.setString(19, visible);
-            stmt.setString(20, descriptionType);
-            stmt.setString(21, description);
-            stmt.setString(22, destination);
-            stmt.setString(23, postingType);
-            stmt.setString(24, relativeOpeningDate);
-            stmt.setInt(25, recruiterID);
-            stmt.setString(26, recruiterName);
-            stmt.setString(27, job);
+            stmt.setString(1, businessUnit);
+            stmt.setString(2, postingTitle);
+            stmt.setString(3, createdBy);
+            stmt.setString(4, createdOn);
+            stmt.setString(5, location);
+            stmt.setString(6, employmentType);
+            stmt.setString(7, shift);
+            stmt.setString(8, description);
+            stmt.setString(9, requirement);
+            stmt.setString(10, validity);
+            stmt.setInt(11, jobID);
 
             stmt.executeUpdate();
         } catch (SQLException ex) {
@@ -118,35 +88,19 @@ public class JobDAO {
 
             rs = stmt.executeQuery("select * from job;");
             while (rs != null && rs.next()) {
-                int jobID = rs.getInt(1);
-                String jobOpeningType = rs.getString(2);
+               int jobID = rs.getInt(1);
+                String postingTitle = rs.getString(2);
                 String businessUnit = rs.getString(3);
-                String job = rs.getString(4);
-                String postingTitle = rs.getString(5);
-                String createdBy = rs.getString(6);
-                String createdOn = rs.getString(7);
-                int targetOpenings = rs.getInt(8);
-                int availableOpenings = rs.getInt(9);
-                String costCentre = rs.getString(10);
-                String company = rs.getString(11);
-                String department = rs.getString(12);
-                String location = rs.getString(13);
-                String areaOfInterest = rs.getString(14);
-                String scheduleType = rs.getString(15);
-                String employmentType = rs.getString(16);
-                String shift = rs.getString(17);
-                int hours = rs.getInt(18);
-                String frequency = rs.getString(19);
-                String visible = rs.getString(20);
-                String descriptionType = rs.getString(21);
-                String description = rs.getString(22);
-                String destination = rs.getString(23);
-                String postingType = rs.getString(24);
-                String relativeOpeningDate = rs.getString(25);
-                int recruiterID = rs.getInt(26);
-                String recruiterName = rs.getString(27);
+                String location = rs.getString(4);
+                String createdBy = rs.getString(5);
+                String createdOn = rs.getString(6);
+                String employmentType = rs.getString(8);
+                String shift = rs.getString(9);
+                String description = rs.getString(10);
+                String requirement = rs.getString(11);
+                String validity = rs.getString(12);
 
-                Job jobPost = new Job(jobID, jobOpeningType, businessUnit, job, postingTitle, createdBy, createdOn, targetOpenings, availableOpenings, costCentre, company, department, location, areaOfInterest, scheduleType, employmentType, shift, hours, frequency, visible, descriptionType, description, destination, postingType, relativeOpeningDate, recruiterID, recruiterName);
+                Job jobPost = new Job(jobID, businessUnit, postingTitle, createdBy, createdOn, location, employmentType, shift, description, requirement, validity);
                 jobList.add(jobPost);
 
             }
@@ -179,34 +133,18 @@ public class JobDAO {
 
             while (rs != null && rs.next()) {
                 int jobID = rs.getInt(1);
-                String jobOpeningType = rs.getString(2);
+                String postingTitle = rs.getString(2);
                 String businessUnit = rs.getString(3);
-                String job = rs.getString(4);
-                String postingTitle = rs.getString(5);
-                String createdBy = rs.getString(6);
-                String createdOn = rs.getString(7);
-                int targetOpenings = rs.getInt(8);
-                int availableOpenings = rs.getInt(9);
-                String costCentre = rs.getString(10);
-                String company = rs.getString(11);
-                String department = rs.getString(12);
-                String location = rs.getString(13);
-                String areaOfInterest = rs.getString(14);
-                String scheduleType = rs.getString(15);
-                String employmentType = rs.getString(16);
-                String shift = rs.getString(17);
-                int hours = rs.getInt(18);
-                String frequency = rs.getString(19);
-                String visible = rs.getString(20);
-                String descriptionType = rs.getString(21);
-                String description = rs.getString(22);
-                String destination = rs.getString(23);
-                String postingType = rs.getString(24);
-                String relativeOpeningDate = rs.getString(25);
-                int recruiterID = rs.getInt(26);
-                String recruiterName = rs.getString(27);
+                String location = rs.getString(4);
+                String createdBy = rs.getString(5);
+                String createdOn = rs.getString(6);
+                String employmentType = rs.getString(8);
+                String shift = rs.getString(9);
+                String description = rs.getString(10);
+                String requirement = rs.getString(11);
+                String validity = rs.getString(12);
 
-                jobPost = new Job(jobID, jobOpeningType, businessUnit, job, postingTitle, createdBy, createdOn, targetOpenings, availableOpenings, costCentre, company, department, location, areaOfInterest, scheduleType, employmentType, shift, hours, frequency, visible, descriptionType, description, destination, postingType, relativeOpeningDate, recruiterID, recruiterName);
+                jobPost = new Job(jobID, businessUnit, postingTitle, createdBy, createdOn, location, employmentType, shift, description, requirement, validity);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -236,35 +174,19 @@ public class JobDAO {
             rs = stmt.executeQuery();
 
             while (rs != null && rs.next()) {
-                int jobID = rs.getInt(1);
-                String jobOpeningType = rs.getString(2);
+              int jobID = rs.getInt(1);
+                String postingTitle = rs.getString(2);
                 String businessUnit = rs.getString(3);
-                String job = rs.getString(4);
-                String postingTitle = rs.getString(5);
-                String createdBy = rs.getString(6);
-                String createdOn = rs.getString(7);
-                int targetOpenings = rs.getInt(8);
-                int availableOpenings = rs.getInt(9);
-                String costCentre = rs.getString(10);
-                String company = rs.getString(11);
-                String department = rs.getString(12);
-                String location = rs.getString(13);
-                String areaOfInterest = rs.getString(14);
-                String scheduleType = rs.getString(15);
-                String employmentType = rs.getString(16);
-                String shift = rs.getString(17);
-                int hours = rs.getInt(18);
-                String frequency = rs.getString(19);
-                String visible = rs.getString(20);
-                String descriptionType = rs.getString(21);
-                String description = rs.getString(22);
-                String destination = rs.getString(23);
-                String postingType = rs.getString(24);
-                String relativeOpeningDate = rs.getString(25);
-                int recruiterID = rs.getInt(26);
-                String recruiterName = rs.getString(27);
+                String location = rs.getString(4);
+                String createdBy = rs.getString(5);
+                String createdOn = rs.getString(6);
+                String employmentType = rs.getString(8);
+                String shift = rs.getString(9);
+                String description = rs.getString(10);
+                String requirement = rs.getString(11);
+                String validity = rs.getString(12);
 
-                Job jobPost = new Job(jobID, jobOpeningType, businessUnit, job, postingTitle, createdBy, createdOn, targetOpenings, availableOpenings, costCentre, company, department, location, areaOfInterest, scheduleType, employmentType, shift, hours, frequency, visible, descriptionType, description, destination, postingType, relativeOpeningDate, recruiterID, recruiterName);
+                Job jobPost = new Job(jobID, businessUnit, postingTitle, createdBy, createdOn, location, employmentType, shift, description, requirement, validity);
                 joblist.add(jobPost);
             }
         } catch (SQLException ex) {

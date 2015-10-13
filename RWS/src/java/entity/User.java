@@ -5,15 +5,13 @@
  */
 package entity;
 
-import java.util.ArrayList;
-
-public class Application {
-
-    private int appID;
-    private int jobID;
+/**
+ *
+ * @author ng_po_000
+ */
+public class User {
     private String username;
-    private String dateApplied;
-    private String status;
+    private String password;
     private String emailAddress;
     private String fullname;
     private String contactNo;
@@ -23,16 +21,16 @@ public class Application {
     private String gender;
     private String blkStreetUnit;
     private String postalCode;
+   
+    
+            
 
-    public Application() {
+    public User() {
     }
 
-    public Application(int appID, int jobID, String username, String dateApplied, String status, String emailAddress, String fullname, String contactNo, String nricType, String nric, String dob, String gender, String blkStreetUnit, String postalCode) {
-        this.appID = appID;
-        this.jobID = jobID;
+    public User(String username, String password, String emailAddress, String fullname, String contactNo, String nricType, String nric, String dob, String gender, String blkStreetUnit, String postalCode) {
         this.username = username;
-        this.dateApplied = dateApplied;
-        this.status = status;
+        this.password = password;
         this.emailAddress = emailAddress;
         this.fullname = fullname;
         this.contactNo = contactNo;
@@ -42,30 +40,6 @@ public class Application {
         this.gender = gender;
         this.blkStreetUnit = blkStreetUnit;
         this.postalCode = postalCode;
-    }
-
-    public int getAppID() {
-        return appID;
-    }
-
-    public int getJobID() {
-        return jobID;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getDateApplied() {
-        return dateApplied;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
     }
 
     public String getFullname() {
@@ -100,30 +74,6 @@ public class Application {
         return postalCode;
     }
 
-    public void setAppID(int appID) {
-        this.appID = appID;
-    }
-
-    public void setJobID(int jobID) {
-        this.jobID = jobID;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setDateApplied(String dateApplied) {
-        this.dateApplied = dateApplied;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
     public void setFullname(String fullname) {
         this.fullname = fullname;
     }
@@ -155,5 +105,30 @@ public class Application {
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
     
+            
 }

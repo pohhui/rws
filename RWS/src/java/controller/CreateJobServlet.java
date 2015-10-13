@@ -9,6 +9,12 @@ import dao.JobDAO;
 import entity.Admin;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,11 +22,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ *
+ * @author ng_po_000
+ */
 @WebServlet(name = "CreateJobServlet", urlPatterns = {"/create.do"})
 public class CreateJobServlet extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -29,57 +40,39 @@ public class CreateJobServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //protect servlet
-        HttpSession session = request.getSession();
-        Admin loggedInAdmin = (Admin) session.getAttribute("admin");
+        {
+            //protect servlet
+            HttpSession session = request.getSession();
+            Admin loggedInAdmin = (Admin) session.getAttribute("admin");
 
-        //check if admin is logged in
-        if (loggedInAdmin == null) {
-            response.sendRedirect("login.jsp");
-            return;
+            //check if admin is logged in
+            if (loggedInAdmin == null) {
+                response.sendRedirect("login.jsp");
+                return;
+            }
+
+            //retrieve form parameters
+            //String jobIDstr = request.getParameter("jobID");
+            String businessUnit = request.getParameter("businessUnit");
+            String postingTitle = request.getParameter("postingTitle");
+            String createdBy = request.getParameter("createdBy");
+            String createdOn = request.getParameter("createdOn");
+            String location = request.getParameter("location");
+            String employmentType = request.getParameter("employmentType");
+            String shift = request.getParameter("shift");
+            String description = request.getParameter("description");
+            String requirement = request.getParameter("requirement");
+            String validity = request.getParameter("validity");
+            String statusCode = "Open";
+
+            //convert into required format 
+            //int jobID = Integer.parseInt(jobIDstr);
+            //create new job
+            JobDAO.create(businessUnit, postingTitle, createdBy, createdOn,statusCode, location, employmentType, shift, description, requirement, validity);
+
+            //redirect user
+            response.sendRedirect("viewJobs.jsp");
         }
-
-        //retrieve form parameters
-        String jobOpeningType = request.getParameter("jobOpeningType");
-        String businessUnit = request.getParameter("businessUnit");
-        String job = request.getParameter("job");
-        String postingTitle = request.getParameter("postingTitle");
-        String createdBy = request.getParameter("createdBy");
-        String createdOn = request.getParameter("createdOn");
-        String targetOpeningsStr = request.getParameter("targetOpenings");
-        String availableOpeningsStr = request.getParameter("availableOpenings");
-        String costCenter = request.getParameter("costCenter");
-        String company = request.getParameter("company");
-        String department = request.getParameter("department");
-        String location = request.getParameter("location");
-        String areaOfInterest = request.getParameter("areaOfInterest");
-
-        String scheduleType = request.getParameter("scheduleType");
-        String employmentType = request.getParameter("employmentType");
-        String shift = request.getParameter("shift");
-        String hoursStr = request.getParameter("hours");
-        String frequency = request.getParameter("frequency");
-        String visible = request.getParameter("visible");
-        String descriptionType = request.getParameter("descriptionType");
-        String description = request.getParameter("description");
-        String destination = request.getParameter("destination");
-        String postingType = request.getParameter("postingType");
-        String relativeOpeningDate = request.getParameter("relativeOpeningDate");
-
-        String recruiterIDStr = request.getParameter("recruiterID");
-        String recruiterName = request.getParameter("recruiterName");
-
-        //convert into required format (for ints)
-        int targetOpenings = Integer.parseInt(targetOpeningsStr);
-        int availableOpenings = Integer.parseInt(availableOpeningsStr);
-        int hours = Integer.parseInt(hoursStr);
-        int recruiterID = Integer.parseInt(recruiterIDStr);
-
-        //create new job
-        JobDAO.create(jobOpeningType, businessUnit, job, postingTitle, createdBy, createdOn, targetOpenings, availableOpenings, costCenter, company, department, location, areaOfInterest, scheduleType, employmentType, shift, hours, frequency, visible, descriptionType, description, destination, postingType, relativeOpeningDate, recruiterID, recruiterName);
-
-        //redirect user
-        response.sendRedirect("viewJobs.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

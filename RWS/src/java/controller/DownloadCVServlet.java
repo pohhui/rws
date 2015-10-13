@@ -17,12 +17,6 @@ import com.itextpdf.text.pdf.PdfStamper;
 import dao.ApplicationDAO;
 import entity.Admin;
 import entity.Application;
-import entity.EmergencyContact;
-import entity.EmploymentHistory;
-import entity.FamilyParticulars;
-import entity.Language;
-import entity.Qualification;
-import entity.Reference;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -75,7 +69,7 @@ public class DownloadCVServlet extends HttpServlet {
             int appID = Integer.parseInt(appIDStr);
             Application application = ApplicationDAO.retrieveByAppID(appID);
 
-            ZipEntry entry = new ZipEntry(application.getGivenName() + "_CV.pdf");
+            ZipEntry entry = new ZipEntry(application.getFullname() + "_CV.pdf");
             zos.putNextEntry(entry);
 
             try {

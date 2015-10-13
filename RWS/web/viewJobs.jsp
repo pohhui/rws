@@ -69,9 +69,9 @@
                                 <thead>
                                     <tr>
                                         <th>Job ID</th>
-                                        <th>Job Opening</th>                                        
-                                        <th>Type</th>
-                                        <th>Area of Interest</th>
+                                        <th>Job Opening</th>
+                                        <th>Business Unit</th>    
+                                        <th>Location</th>
                                         <th>Created On</th>
                                         <th>Action</th>
 
@@ -79,9 +79,9 @@
                                 </thead>
 
                                 <tbody>
-                                    <%                                        
+                                    <%                                       
                                         JobDAO jobDAO = new JobDAO();
-                                        
+
                                         ArrayList<Job> jobList = jobDAO.retrieveJobsByAdmin(loggedInAdmin.getId());
 
                                         for (int i = 0; i < jobList.size(); i++) {
@@ -90,10 +90,10 @@
                                     <tr>
                                         <td><%=job.getJobId()%></td>
                                         <td><%=job.getPostingTitle()%></td>                                        
-                                        <td><%=job.getEmploymentType()%></td>
-                                        <td><%=job.getAreaOfInterest()%></td>
+                                        <td><%=job.getBusinessUnit()%></td>
+                                        <td><%=job.getLocation()%></td>
                                         <td><%=job.getCreatedOn()%></td>        
-                                        <td class="text-center"><a href="viewJob.jsp?id=<%=job.getJobId()%>"> <button class="btn btn-default">View Details</button></a></td>
+                                        <td class="text-center"><a href="viewJob.jsp?id=<%=job.getJobId()%>"> <button class="btn btn-default">View</button></a></td>
 
                                     </tr>
 
@@ -102,7 +102,7 @@
                                     %>
 
                                 </tbody>
-                               
+
                             </table>
                         </div>
                         <div id="menu1" class="tab-pane fade">
@@ -111,27 +111,27 @@
                                 <thead>
                                     <tr>
                                         <th>Job ID</th>
-                                        <th>Job Opening</th>
-                                        <th>Type</th>
-                                        <th>Area of Interest</th>
+                                        <th>Job Opening</th>                                        
+                                        <th>Business Unit</th>
+                                        <th>Location</th>
                                         <th>Created On</th>
                                         <th>Action</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <%            
+                                    <%
                                         ArrayList<Job> allJobs = jobDAO.retrieveAll();
                                         for (int i = 0; i < allJobs.size(); i++) {
                                             Job jobs = allJobs.get(i);
                                     %>   
                                     <tr>
                                         <td><%=jobs.getJobId()%></td>
-                                        <td><%=jobs.getPostingTitle()%></td>
-                                        <td><%=jobs.getEmploymentType()%></td>
-                                        <td><%=jobs.getAreaOfInterest()%></td>
-                                        <td><%=jobs.getCreatedOn()%></td>        
-                                        <td class="text-center"><a href="viewJob.jsp?id=<%=jobs.getJobId()%>"> <button class="btn btn-default">View Details</button></a></td>
+                                        <td><%=jobs.getPostingTitle()%></td>                                        
+                                        <td><%=jobs.getBusinessUnit()%></td>
+                                        <td><%=jobs.getLocation()%></td>
+                                        <td><%=jobs.getCreatedOn()%></td>    
+                                        <td class="text-center"><a href="viewJob.jsp?id=<%=jobs.getJobId()%>"> <button class="btn btn-default">View</button></a></td>
                                     </tr>
 
                                     <%
