@@ -113,7 +113,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    
+
                                     <label class="col-sm-4 control-label">Employment Type</label>
                                     <div class="col-sm-8">
                                         <select name="employmentType" class="form-control">
@@ -157,6 +157,18 @@
                             </div>
                         </div>
                         <button data-toggle="modal" data-target="#createModal" type="button" style="float:right;" class="btn btn-success btn-lg">Create <i class="fa fa-chevron-circle-right"></i></button>
+                        <!--Print errors here-->
+                        <%
+                            String errorMsg = (String) request.getAttribute("errorMsg");
+
+                            if (errorMsg != null) {
+                        %>
+                        <div class="form-group">
+                            <div class="col-sm-offset-5"><font color="red"><%=errorMsg%></font></div>
+                        </div>
+                        <%
+                            }
+                        %>
                     </div>
 
             </div>

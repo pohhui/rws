@@ -26,40 +26,40 @@ $(document).ready(function () {
         $('ul.setup-panel li a[href="#step-2"]').trigger('click');
         $('html,body').scrollTop(0);
     });
-    
+
     $('#previous-step-1').on('click', function (e) {
         $('ul.setup-panel li a[href="#step-1"]').trigger('click');
         $('html,body').scrollTop(0);
     });
-    
+
     $('#next-step-3').on('click', function (e) {
         $('ul.setup-panel li:eq(2)').removeClass('disabled');
         $('ul.setup-panel li a[href="#step-3"]').trigger('click');
         $('html,body').scrollTop(0);
     });
-    
+
     $('#previous-step-2').on('click', function (e) {
         $('ul.setup-panel li a[href="#step-2"]').trigger('click');
         $('html,body').scrollTop(0);
     });
-    
+
     $('#next-step-4').on('click', function (e) {
         $('ul.setup-panel li:eq(3)').removeClass('disabled');
         $('ul.setup-panel li a[href="#step-4"]').trigger('click');
         $('html,body').scrollTop(0);
     });
-    
+
     $('#previous-step-3').on('click', function (e) {
         $('ul.setup-panel li a[href="#step-3"]').trigger('click');
         $('html,body').scrollTop(0);
     });
-    
+
     $('#next-step-5').on('click', function (e) {
         $('ul.setup-panel li:eq(4)').removeClass('disabled');
         $('ul.setup-panel li a[href="#step-5"]').trigger('click');
         $('html,body').scrollTop(0);
     });
-    
+
     $('#previous-step-4').on('click', function (e) {
         $('ul.setup-panel li a[href="#step-4"]').trigger('click');
     });
@@ -119,19 +119,18 @@ $(document).ready(function () {
     $('#costCenterAutocomplete .typeahead').typeahead({
         hint: true,
         highlight: true,
-        
     },
-    {
-        name: 'costCenter',
-        source: substringMatcher(costCenters),
-        templates: {
-            empty: [
-                '<div>',
-                'Unable to find any results',
-                '</div>'
-            ].join('\n')
-        }
-    });
+            {
+                name: 'costCenter',
+                source: substringMatcher(costCenters),
+                templates: {
+                    empty: [
+                        '<div>',
+                        'Unable to find any results',
+                        '</div>'
+                    ].join('\n')
+                }
+            });
 
     //location autocomplete
     var locations = [
@@ -200,5 +199,13 @@ $(document).ready(function () {
             ].join('\n')
         }
     });
+
+  
 });
 
+$(document).ready(function(){
+
+    
+    $("#businessUnit").append('<option value="' + $("#newSchool").val() + '">' + $("#newSchool").val() + '</option>');
+
+});

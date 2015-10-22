@@ -132,6 +132,7 @@
                                             <div class="text-right">
                                                 <button id="select-all" type="button" class="btn btn-danger col-sm-offset-4" style="margin-bottom: 10px;">Select All &nbsp;<i class="fa fa-check"></i></button>
                                                 <button id="download-button" disabled="disabled" data-toggle="modal" data-target="#downloadCVModal" type="button" class="btn btn-success" style="margin-bottom: 10px;">Download &nbsp;<i class="fa fa-download"></i></button>
+                                                <button id="changeStatus-button" disabled="disabled" data-toggle="modal" data-target="#statusChangeModal" type="button" class="btn btn-success" style="margin-bottom: 10px;">Change Status &nbsp;<i class="fa fa-edit"></i></button>
                                             </div>
                                         </div>
                                     </div>
@@ -143,11 +144,11 @@
                                             <tr>
                                                 <th>Applicant</th>
                                                 <th>Date of Birth</th>
-                                                <th>Nationality ID Type</th>
-                                                <th>Application Status</th>
+                                                <th>Nationality</th>
                                                 <th>Gender</th>
                                                 <th>Postal Code</th>
                                                 <th>Date Applied</th>
+                                                <th>Status</th>
                                                 <th>Select</th>
                                             </tr>
                                         </thead>
@@ -160,10 +161,10 @@
                                                 <td><%=app.getFullname()%></td>
                                                 <td><%=app.getDob()%></td>
                                                 <td><%=app.getNricType()%></td>
-                                                <td><%=app.getStatus()%></td> 
                                                 <td><%=app.getGender()%></td> 
                                                 <td><%=app.getPostalCode()%></td> 
                                                 <td><%=app.getDateApplied()%></td> 
+                                                <td><%=app.getStatus()%></td> 
 
                                                 <td><input type="checkbox" name="download" value="<%=app.getAppID()%>"/></td>
                                             </tr>
@@ -172,15 +173,17 @@
                                             %>
                                         </tbody>
                                     </table> 
+                                        <input type="hidden" name="jobID" value="<%=jobId%>">
 
                                     <%@include file = "downloadCVModal.jsp"%>
+                                    <%@include file = "changeStatusModal.jsp"%>
                                 </form>                            
                             </div>
 
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="text-right">
-                                        <a class="btn btn-default" href="viewJobs.jsp" role="button">Back</a>                                                
+                                        <a class="btn btn-default" href="viewJobs.jsp" role="button">Back</a> 
                                     </div>
                                 </div>
                             </div>

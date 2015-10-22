@@ -38,7 +38,7 @@ public class Job {
         this.validity = validity;
     }
 
-    public Job(String businessUnit, String postingTitle, String createdBy, String createdOn,String statusCode, String location, String employmentType, String shift, String description, String requirement, String validity) {
+    public Job(String businessUnit, String postingTitle, String createdBy, String createdOn, String statusCode, String location, String employmentType, String shift, String description, String requirement, String validity) {
         this.businessUnit = businessUnit;
         this.postingTitle = postingTitle;
         this.createdBy = createdBy;
@@ -61,6 +61,21 @@ public class Job {
         this.location = location;
         this.employmentType = employmentType;
         this.shift = shift;
+        this.description = description;
+        this.requirement = requirement;
+        this.validity = validity;
+    }
+
+    public Job(int jobId, String businessUnit, String postingTitle, String createdBy, String createdOn, String statusCode, String location, String employmentType, String shift, String description, String requirement, String validity) {
+        this.jobId = jobId;
+        this.businessUnit = businessUnit;
+        this.postingTitle = postingTitle;
+        this.createdBy = createdBy;
+        this.createdOn = createdOn;
+        this.location = location;
+        this.employmentType = employmentType;
+        this.shift = shift;
+        this.statusCode = statusCode;
         this.description = description;
         this.requirement = requirement;
         this.validity = validity;

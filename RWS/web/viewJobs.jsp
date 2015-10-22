@@ -73,14 +73,14 @@
                                         <th>Business Unit</th>    
                                         <th>Location</th>
                                         <th>Created On</th>
+                                        <th>Status</th>
                                         <th>Action</th>
 
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <%                                       
-                                        JobDAO jobDAO = new JobDAO();
+                                    <%                                        JobDAO jobDAO = new JobDAO();
 
                                         ArrayList<Job> jobList = jobDAO.retrieveJobsByAdmin(loggedInAdmin.getId());
 
@@ -92,7 +92,8 @@
                                         <td><%=job.getPostingTitle()%></td>                                        
                                         <td><%=job.getBusinessUnit()%></td>
                                         <td><%=job.getLocation()%></td>
-                                        <td><%=job.getCreatedOn()%></td>        
+                                        <td><%=job.getCreatedOn()%></td>  
+                                        <td><%=job.getStatusCode()%></td>
                                         <td class="text-center"><a href="viewJob.jsp?id=<%=job.getJobId()%>"> <button class="btn btn-default">View</button></a></td>
 
                                     </tr>
@@ -115,6 +116,7 @@
                                         <th>Business Unit</th>
                                         <th>Location</th>
                                         <th>Created On</th>
+                                        <th>Status</th>
                                         <th>Action</th>
 
                                     </tr>
@@ -130,7 +132,8 @@
                                         <td><%=jobs.getPostingTitle()%></td>                                        
                                         <td><%=jobs.getBusinessUnit()%></td>
                                         <td><%=jobs.getLocation()%></td>
-                                        <td><%=jobs.getCreatedOn()%></td>    
+                                        <td><%=jobs.getCreatedOn()%></td> 
+                                        <td><%=jobs.getStatusCode()%></td> 
                                         <td class="text-center"><a href="viewJob.jsp?id=<%=jobs.getJobId()%>"> <button class="btn btn-default">View</button></a></td>
                                     </tr>
 

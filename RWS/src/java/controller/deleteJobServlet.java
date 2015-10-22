@@ -21,8 +21,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author ng_po_000
  */
-@WebServlet(name = "EditJobServlet", urlPatterns = {"/edit.do"})
-public class EditJobServlet extends HttpServlet {
+@WebServlet(name = "deleteJobServlet", urlPatterns = {"/delete.do"})
+public class deleteJobServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,8 +35,8 @@ public class EditJobServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     
-        //protect servlet
+        
+         //protect servlet
          //protect servlet
             HttpSession session = request.getSession();
             Admin loggedInAdmin = (Admin) session.getAttribute("admin");
@@ -52,30 +52,12 @@ public class EditJobServlet extends HttpServlet {
 
             //retrieve form parameters
             String jobIDstr = request.getParameter("jobID");
-            String businessUnit = request.getParameter("businessUnit");
-            String postingTitle = request.getParameter("postingTitle");
-            String createdBy = request.getParameter("createdBy");
-            String createdOn = request.getParameter("createdOn");
-            String status = request.getParameter("status");
-            String location = request.getParameter("location");
-            String employmentType = request.getParameter("employmentType");
-            String shift = request.getParameter("shift");
-            String description = request.getParameter("description");
-            String requirement = request.getParameter("requirement");
-            String validity = request.getParameter("validity");
             
             
             int jobID = Integer.parseInt(jobIDstr);
-
-            if (postingTitle.equals("") || validity.equals("") || requirement.equals("") || description.equals("")) {
-                request.setAttribute("errorMsg", "Please fill in all field(s)");
-                rd.forward(request, response);
-                return;
-            }
-      
         
         //update job
-        JobDAO.update(jobID, businessUnit, postingTitle, createdBy, createdOn, status, location, employmentType, shift, description, requirement, validity);
+        JobDAO.delete(jobID);
 
         //redirect user
         response.sendRedirect("viewJobs.jsp");

@@ -23,9 +23,29 @@ public class Application {
     private String gender;
     private String blkStreetUnit;
     private String postalCode;
+    private String postingTitle;
 
     public Application() {
     }
+
+    public Application(int appID, int jobID, String postingTitle, String username, String dateApplied, String status, String emailAddress, String fullname, String contactNo, String nricType, String nric, String dob, String gender, String blkStreetUnit, String postalCode) {
+        this.appID = appID;
+        this.jobID = jobID;
+        this.username = username;
+        this.dateApplied = dateApplied;
+        this.status = status;
+        this.emailAddress = emailAddress;
+        this.fullname = fullname;
+        this.contactNo = contactNo;
+        this.nricType = nricType;
+        this.nric = nric;
+        this.dob = dob;
+        this.gender = gender;
+        this.blkStreetUnit = blkStreetUnit;
+        this.postalCode = postalCode;
+        this.postingTitle = postingTitle;
+    }
+    
 
     public Application(int appID, int jobID, String fullname, String username, String contactNo, String nricType, String nric, String dob, String status, String gender, String blkStreetUnit, String postalCode, String dateApplied, String emailAddress) {
         this.appID = appID;
@@ -154,6 +174,14 @@ public class Application {
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
+    }
+
+    public String getPostingTitle() {
+        return postingTitle;
+    }
+
+    public void setPostingTitle(String postingTitle) {
+        this.postingTitle = postingTitle;
     }
     
 }

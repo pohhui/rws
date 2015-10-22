@@ -18,7 +18,7 @@ $(document).ready(function () {
     var table1 = $('#example1').dataTable();
 
 
-    // Apply the search
+//    // Apply the search
 //    table.columns().every(function () {
 //        var that = this;
 //
@@ -30,6 +30,7 @@ $(document).ready(function () {
 //            }
 //        });
 //    });
+    
     $('#example')
             .removeClass('display')
             .addClass('table table-striped table-bordered');

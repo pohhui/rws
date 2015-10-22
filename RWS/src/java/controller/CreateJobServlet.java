@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -45,6 +46,9 @@ public class CreateJobServlet extends HttpServlet {
             HttpSession session = request.getSession();
             Admin loggedInAdmin = (Admin) session.getAttribute("admin");
 
+            //to send back error messages if any
+            RequestDispatcher rd = request.getRequestDispatcher("create.jsp");
+
             //check if admin is logged in
             if (loggedInAdmin == null) {
                 response.sendRedirect("login.jsp");
@@ -65,10 +69,16 @@ public class CreateJobServlet extends HttpServlet {
             String validity = request.getParameter("validity");
             String statusCode = "Open";
 
+            if (postingTitle.equals("") || validity.equals("") || requirement.equals("") || description.equals("")) {
+                request.setAttribute("errorMsg", "Please fill in all field(s)");
+                rd.forward(request, response);
+                return;
+            }
+
             //convert into required format 
             //int jobID = Integer.parseInt(jobIDstr);
             //create new job
-            JobDAO.create(businessUnit, postingTitle, createdBy, createdOn,statusCode, location, employmentType, shift, description, requirement, validity);
+            JobDAO.create(businessUnit, postingTitle, createdBy, createdOn, statusCode, location, employmentType, shift, description, requirement, validity);
 
             //redirect user
             response.sendRedirect("viewJobs.jsp");

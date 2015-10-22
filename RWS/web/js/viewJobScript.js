@@ -20,6 +20,7 @@ $(document).ready(function () {
         }
         
         $('#download-button').prop('disabled', !checkBoxes.prop("checked"));
+        $('#changeStatus-button').prop('disabled', !checkBoxes.prop("checked"));
     });
 
     $(':checkbox').click(function () {
@@ -33,5 +34,20 @@ $(document).ready(function () {
         
         $('#download-button').prop('disabled', canDownload);
     });
+    
+    $(':checkbox').click(function () {
+        var canChangeStatus = true;
+        
+        $('input[type=checkbox]').each(function () {
+            if (this.checked) {
+                canChangeStatus = false;
+            }
+        });
+        
+        $('#changeStatus-button').prop('disabled', canChangeStatus);
+    });
+   
+    
+    
 });
 
