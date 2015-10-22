@@ -28,7 +28,7 @@ public class Application {
     public Application() {
     }
 
-    public Application(int appID, int jobID, String postingTitle, String username, String dateApplied, String status, String emailAddress, String fullname, String contactNo, String nricType, String nric, String dob, String gender, String blkStreetUnit, String postalCode) {
+    public Application(int appID, int jobID, String username, String dateApplied, String status, String emailAddress, String fullname, String contactNo, String nricType, String nric, String dob, String gender, String blkStreetUnit, String postalCode, String postingTitle) {
         this.appID = appID;
         this.jobID = jobID;
         this.username = username;
@@ -44,10 +44,9 @@ public class Application {
         this.blkStreetUnit = blkStreetUnit;
         this.postalCode = postalCode;
         this.postingTitle = postingTitle;
-    }
+    }    
     
-
-    public Application(int appID, int jobID, String fullname, String username, String contactNo, String nricType, String nric, String dob, String status, String gender, String blkStreetUnit, String postalCode, String dateApplied, String emailAddress) {
+    public Application(int appID, int jobID, String username, String dateApplied, String status, String emailAddress, String fullname, String contactNo, String nricType, String nric, String dob, String gender, String blkStreetUnit, String postalCode) {
         this.appID = appID;
         this.jobID = jobID;
         this.username = username;
@@ -62,7 +61,8 @@ public class Application {
         this.gender = gender;
         this.blkStreetUnit = blkStreetUnit;
         this.postalCode = postalCode;
-    }
+        this.postingTitle = postingTitle;
+    }   
 
     public int getAppID() {
         return appID;

@@ -45,7 +45,7 @@ public class ApplicationDAO {
                 String blkStreetUnit = rs.getString(12);
                 String postalCode = rs.getString(13);
 
-                applicationList.add(new Application(appID, jobID, fullname, username, contactNo, nricType, nric, dob, status, gender, blkStreetUnit, postalCode, dateApplied, emailAddress));
+                applicationList.add(new Application(appID, jobID, username, dateApplied, status, emailAddress, fullname, contactNo, nricType, nric, dob, gender, blkStreetUnit, postalCode));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -85,8 +85,9 @@ public class ApplicationDAO {
                 String gender = rs.getString(11);
                 String blkStreetUnit = rs.getString(12);
                 String postalCode = rs.getString(13);
-
-                application = new Application(appID, jobIDApplied, fullname, username, contactNo, nricType, nric, dob, status, gender, blkStreetUnit, postalCode, dateApplied, emailAddress);
+                String postingTitle = JobDAO.retrieveJobById(jobIDApplied).getPostingTitle();
+                
+                application = new Application(appID, jobIDApplied, username, dateApplied, status, emailAddress, fullname, contactNo, nricType, nric, dob, gender, blkStreetUnit, postalCode, postingTitle);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
