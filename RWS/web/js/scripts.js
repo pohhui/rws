@@ -11,3 +11,7 @@ $(document).ready(function () {
         $(this).find("i").toggleClass("fa fa-chevron-right fa fa-chevron-down");
     });
 });
+
+$('#renderButton').on('click', function() {
+    $('#myTab a[href="#profile"]').tab('show');
+});

@@ -1,3 +1,8 @@
+<%@page import="dao.ApplicationDAO"%>
+<%@page import="entity.Application"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="entity.Job"%>
+<%@page import="dao.JobDAO"%>
 <!DOCTYPE html>
 <%@include file = "protect.jsp"%>
 <html>
@@ -5,9 +10,10 @@
         <title>Admin Dashboard</title>
 
         <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">  
+        <link href="css/jquery.dataTables.min.css" rel="stylesheet">
         <link href="css/site.css" rel="stylesheet">
-        <link href='https://fonts.googleapis.com/css?family=Roboto:400,100' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,100' rel='stylesheet' type='text/css'>   
     </head>
     <body>
         <!--page load-->
@@ -39,6 +45,9 @@
         </div>
         <!-- /Header -->
 
+        <%            ArrayList<Application> applicationList = ApplicationDAO.retrieveAll();
+        %>
+
         <!-- Main -->
         <div class="container-fluid">
             <div class="row">
@@ -55,48 +64,51 @@
                     </ul>
                 </div>  
                 <div class="col-sm-9">
-                    <div class="row">
-                        <!-- center left-->
-                        <div class="col-md-4">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4>Jobs Occupied</h4></div>
-                                <div class="panel-body">
-                                    <div class="chart-demo" style="margin-left: 30px; margin-top: 10px;">
-                                        <canvas id="doughnutChart" width="200" height="200"></canvas>
-                                    </div>
-                                </div>
-                                <!--/panel-body-->
-                            </div>
-                            <!--/panel-->
-                        </div>
-                        <div class="col-md-4">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4>Job Type</h4></div>
-                                <div class="panel-body">
-                                    <div class="chart-demo" style="margin-left: 30px; margin-top: 10px;">
-                                        <canvas id="radarChart" width="200" height="200"></canvas>
-                                    </div>
-                                </div>
-                                <!--/panel-body-->
-                            </div>
-                            <!--/panel-->
-                        </div>
-                        <div class="col-md-4">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4>Monthly Report</h4></div>
-                                <div class="panel-body">
-                                    <div class="chart-demo" style="margin-left: 30px; margin-top: 10px;">
-                                        <canvas id="barChart" width="200" height="200"></canvas>
-                                    </div>
-                                </div>
-                                <!--/panel-body-->
-                            </div>
-                            <!--/panel-->
-                        </div>
+                    <div>
+
+                        <table id="example" class="display" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Applicant</th>
+                                    <th>Date of Birth</th>
+                                    <th>Nationality</th>
+                                    <th>Gender</th>
+                                    <th>Postal Code</th>
+                                    <th>Date Applied</th>
+                                    <th>Job ID</th >
+                                    <th>Job Applied</th >
+                                    <th>Status</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%
+                                    for (int i = 0; i < applicationList.size(); i++) {
+                                        Application app = applicationList.get(i);
+                                %>   
+                                <tr>
+                                    <td> <p><a href="viewApplicant.jsp?username=<%=app.getUsername()%>"><%=app.getFullname()%></a></p></td>
+                                    <td><%=app.getDob()%></td>
+                                    <td><%=app.getNricType()%></td>
+                                    <td><%=app.getGender()%></td> 
+                                    <td><%=app.getPostalCode()%></td> 
+                                    <td><%=app.getDateApplied()%></td>
+                                    <td><%=app.getJobID()%></td>
+                                    <td><%=app.getPostingTitle()%></td>
+                                    <td><%=app.getStatus()%></td> 
+
+
+                                </tr>
+                                <%
+                                    }
+                                %>
+                            </tbody>
+                        </table>
                     </div>
+
+
+
+
                 </div>
             </div>
         </div>
@@ -104,10 +116,9 @@
         <%@include file = "logoutModal.jsp"%>
         <!-- /Main -->        
         <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/bootstrap-notify.min.js"></script>
-        <script src="js/Chart.min.js"></script>
-        <script src="js/scripts.js"></script>
-        <script src="js/charts.js"></script>        
+        <script src="js/jquery.dataTables.min.js"></script>
+        <script src="js/scripts.js"></script>  
+        <script src="js/viewJobsScript.js"></script> 
+        <script src="js/tableJobs.js"></script>
     </body>
 </html>

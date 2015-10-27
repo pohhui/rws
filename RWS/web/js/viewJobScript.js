@@ -20,6 +20,18 @@ $(document).ready(function () {
         }
         
         $('#download-button').prop('disabled', !checkBoxes.prop("checked"));
+       
+    });
+    
+    $("#select-all").click(function () {
+        var checkBoxes = $("input[name='changeStatus']");
+        checkBoxes.prop("checked", !checkBoxes.prop("checked"));
+        if (checkBoxes.prop("checked")) {
+            $("#select-all").html('Deselect All &nbsp;<i class="fa fa-times"></i>');
+        } else {
+            $("#select-all").html('Select All &nbsp;<i class="fa fa-check"></i>');
+        }
+        
         $('#changeStatus-button').prop('disabled', !checkBoxes.prop("checked"));
     });
 

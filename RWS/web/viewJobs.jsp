@@ -50,8 +50,10 @@
                     <ul class="nav nav-stacked">
                         <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#userMenu">Modules <i class="fa fa-chevron-down"></i></a>
                             <ul class="nav nav-stacked collapse in" id="userMenu">
+                                <li> <a href="home.jsp"><i class="glyphicon glyphicon-home"></i>&nbsp; Home</a></li>
                                 <li> <a href="create.jsp"><i class="glyphicon glyphicon-plus"></i>&nbsp; Create Job</a></li>
                                 <li><a href="viewJobs.jsp"><i class="glyphicon glyphicon-briefcase"></i>&nbsp; Manage Jobs </a></li>
+                                <li><a href="viewApplications.jsp"><i class="glyphicon glyphicon-file"></i>&nbsp; Manage Applications </a></li>
                             </ul>
                         </li>    
                     </ul>
@@ -74,7 +76,8 @@
                                         <th>Location</th>
                                         <th>Created On</th>
                                         <th>Status</th>
-                                        <th>Action</th>
+                                        <th>Download</th>
+                                        <th>Update</th>
 
                                     </tr>
                                 </thead>
@@ -89,13 +92,13 @@
                                     %>   
                                     <tr>
                                         <td><%=job.getJobId()%></td>
-                                        <td><%=job.getPostingTitle()%></td>                                        
+                                        <td><a href="viewJob.jsp?id=<%=job.getJobId()%>"</a><%=job.getPostingTitle()%></td>                                        
                                         <td><%=job.getBusinessUnit()%></td>
                                         <td><%=job.getLocation()%></td>
                                         <td><%=job.getCreatedOn()%></td>  
                                         <td><%=job.getStatusCode()%></td>
-                                        <td class="text-center"><a href="viewJob.jsp?id=<%=job.getJobId()%>"> <button class="btn btn-default">View</button></a></td>
-
+                                        <td class="text-center"><a href="viewJob.jsp?id=<%=job.getJobId()%>"> <button class="btn btn-default">Download</button></a></td>
+                                        <td class="text-center"><a href="filterForUpdate.jsp?id=<%=job.getJobId()%>"> <button class="btn btn-default">Update</button></a></td>
                                     </tr>
 
                                     <%
@@ -112,12 +115,13 @@
                                 <thead>
                                     <tr>
                                         <th>Job ID</th>
-                                        <th>Job Opening</th>                                        
-                                        <th>Business Unit</th>
+                                        <th>Job Opening</th>
+                                        <th>Business Unit</th>    
                                         <th>Location</th>
                                         <th>Created On</th>
                                         <th>Status</th>
-                                        <th>Action</th>
+                                        <th>Download</th>
+                                        <th>Update</th>
 
                                     </tr>
                                 </thead>
@@ -128,14 +132,15 @@
                                             Job jobs = allJobs.get(i);
                                     %>   
                                     <tr>
-                                        <td><%=jobs.getJobId()%></td>
-                                        <td><%=jobs.getPostingTitle()%></td>                                        
+                                         <td><%=jobs.getJobId()%></td>
+                                        <td><a href="viewJob.jsp?id=<%=jobs.getJobId()%>"</a><%=jobs.getPostingTitle()%></td>                                        
                                         <td><%=jobs.getBusinessUnit()%></td>
                                         <td><%=jobs.getLocation()%></td>
-                                        <td><%=jobs.getCreatedOn()%></td> 
-                                        <td><%=jobs.getStatusCode()%></td> 
-                                        <td class="text-center"><a href="viewJob.jsp?id=<%=jobs.getJobId()%>"> <button class="btn btn-default">View</button></a></td>
-                                    </tr>
+                                        <td><%=jobs.getCreatedOn()%></td>  
+                                        <td><%=jobs.getStatusCode()%></td>
+                                        <td class="text-center"><a href="viewJob.jsp?id=<%=jobs.getJobId()%>"> <button class="btn btn-default">Download</button></a></td>
+                                        <td class="text-center"><a href="filterForUpdate.jsp?id=<%=jobs.getJobId()%>"> <button class="btn btn-default">Update</button></a></td>
+                                    </tr>   
 
                                     <%
                                         }

@@ -5,7 +5,7 @@
  */
 package controller;
 
-import dao.JobDAO;
+import dao.ApplicationDAO;
 import entity.Admin;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,8 +21,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author ng_po_000
  */
-@WebServlet(name = "/deleteJobServlet", urlPatterns = {"/delete.do"})
-public class deleteJobServlet extends HttpServlet {
+@WebServlet(name = "ChangeStatus2Servlet", urlPatterns = {"/changeStatus2.do"})
+public class ChangeStatus2Servlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,33 +35,33 @@ public class deleteJobServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-         //protect servlet
-         //protect servlet
-            HttpSession session = request.getSession();
-            Admin loggedInAdmin = (Admin) session.getAttribute("admin");
+        //protect servlet
+        //protect servlet
+        HttpSession session = request.getSession();
+        Admin loggedInAdmin = (Admin) session.getAttribute("admin");
 
-            //to send back error messages if any
-            RequestDispatcher rd = request.getRequestDispatcher("edit.jsp");
+        //to send back error messages if any
+        RequestDispatcher rd = request.getRequestDispatcher("create.jsp");
 
-            //check if admin is logged in
-            if (loggedInAdmin == null) {
-                response.sendRedirect("login.jsp");
-                return;
-            }
+        //check if admin is logged in
+        if (loggedInAdmin == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
 
-            //retrieve form parameters
-            String jobIDstr = request.getParameter("jobID");
-            
-            
-            int jobID = Integer.parseInt(jobIDstr);
-        
-        //update job
-        JobDAO.delete(jobID);
+        //retrieve form parameters
+        String username = request.getParameter("username");
+        String[] appIDs = request.getParameterValues("changeStatus");
+        String status = request.getParameter("status");
+
+        for (String appIDStr : appIDs) {
+            int appID = Integer.parseInt(appIDStr);
+            //update job
+            ApplicationDAO.updateStatus(appID, status);
+        }
 
         //redirect user
-        response.sendRedirect("viewJobs.jsp");
-        
+        response.sendRedirect("viewApplicantUpdate.jsp?username=" + username);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

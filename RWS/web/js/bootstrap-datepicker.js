@@ -967,3 +967,11 @@
       
     });
   });
+  
+  $(function() {
+    $('#datetimepicker3').datepicker({
+      
+    });
+  });
+  
+   

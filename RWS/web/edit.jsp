@@ -55,14 +55,15 @@
                 <ul class="nav nav-stacked">
                     <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#userMenu">Modules <i class="fa fa-chevron-down"></i></a>
                         <ul class="nav nav-stacked collapse in" id="userMenu">
+                            <li> <a href="home.jsp"><i class="glyphicon glyphicon-home"></i>&nbsp; Home</a></li>
                             <li><a href="create.jsp"><i class="glyphicon glyphicon-plus"></i>&nbsp; Create Job</a></li>
                             <li><a href="viewJobs.jsp"><i class="glyphicon glyphicon-briefcase"></i>&nbsp; Manage Jobs </a></li>
+                            <li><a href="viewApplications.jsp"><i class="glyphicon glyphicon-file"></i>&nbsp; Manage Applications </a></li>
                         </ul>
                     </li>    
                 </ul>
             </div>  
-            <%                        
-                int jobId = Integer.parseInt(request.getParameter("id"));
+            <%                int jobId = Integer.parseInt(request.getParameter("id"));
                 JobDAO jobDAO = new JobDAO();
                 Job job = jobDAO.retrieveJobById(jobId);
 
@@ -180,7 +181,7 @@
                             </div>
                         </div>
                         <button data-toggle="modal" data-target="#editModal" type="button" style="float:right;" class="btn btn-success btn-lg">Apply Changes    <i class="fa fa-chevron-circle-right"></i></button>
-                        
+
                         <button data-toggle="modal" data-target="#deleteModal" type="button" style="float:right;margin: 0px 10px 10px 0px;" class="btn btn-danger btn-lg">Delete    <i class="fa fa-trash"></i></button>
                         <a class="btn btn-success btn-lg" href="viewJobs.jsp?id=<%=jobId%>" role="button"> <i class="fa fa-chevron-circle-left"></i>    Back</a>                                                
                         <input type="hidden" name="jobID" value="<%=jobId%>">
@@ -208,8 +209,8 @@
 </form>
 
 <form class="form-horizontal" action="delete.do" method="post">
-<input type="hidden" name="jobID" value="<%=jobId%>">
-<%@include file = "deleteModal.jsp"%>
+    <input type="hidden" name="jobID" value="<%=jobId%>">
+    <%@include file = "deleteModal.jsp"%>
 
 </form>
 </div>

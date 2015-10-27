@@ -6,6 +6,7 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Application {
 
@@ -24,10 +25,30 @@ public class Application {
     private String blkStreetUnit;
     private String postalCode;
     private String postingTitle;
+    private Date dateAppliedDate;
+    private Date dobDate;
+            
 
     public Application() {
     }
 
+    public Application(int appID, int jobID, String username, String status, String emailAddress, String fullname, String nricType, String nric, String gender, String blkStreetUnit, String postalCode, String postingTitle, Date dateAppliedDate, Date dobDate) {
+        this.appID = appID;
+        this.jobID = jobID;
+        this.username = username;
+        this.status = status;
+        this.emailAddress = emailAddress;
+        this.fullname = fullname;
+        this.nricType = nricType;
+        this.nric = nric;
+        this.gender = gender;
+        this.blkStreetUnit = blkStreetUnit;
+        this.postalCode = postalCode;
+        this.postingTitle = postingTitle;
+        this.dateAppliedDate = dateAppliedDate;
+        this.dobDate = dobDate;
+    }
+    
     public Application(int appID, int jobID, String postingTitle, String username, String dateApplied, String status, String emailAddress, String fullname, String contactNo, String nricType, String nric, String dob, String gender, String blkStreetUnit, String postalCode) {
         this.appID = appID;
         this.jobID = jobID;

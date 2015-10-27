@@ -5,10 +5,12 @@
  */
 package controller;
 
-import dao.JobDAO;
+import dao.ApplicationDAO;
 import entity.Admin;
+import entity.Application;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,8 +23,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author ng_po_000
  */
-@WebServlet(name = "/deleteJobServlet", urlPatterns = {"/delete.do"})
-public class deleteJobServlet extends HttpServlet {
+@WebServlet(name = "UpdateStatusServlet", urlPatterns = {"/updateStatus.do"})
+public class UpdateStatusServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,33 +37,44 @@ public class deleteJobServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //protect servlet
+        //protect servlet
+        HttpSession session = request.getSession();
+        Admin loggedInAdmin = (Admin) session.getAttribute("admin");
+
+        //retrieve form parameters
+        //ArrayList<String> filteredUsernames = (ArrayList<String>) session.getAttribute("filteredUsers");
+        String jobID = request.getParameter("jobID");
+        String[] appIDs = request.getParameterValues("changeStatus");
+        String status = request.getParameter("status");
+        //parse applicationList to Application objects
+
+        //to send back error messages if any
+        RequestDispatcher rd = request.getRequestDispatcher("updateStatus.jsp?id=" + jobID);
+
+        //check if admin is logged in
+        if (loggedInAdmin == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+       
+        for (String appIDStr : appIDs) {
+            int appID = Integer.parseInt(appIDStr);
+            //update job
+            ApplicationDAO.updateStatus(appID, status);
+           
+        }
+
+        //ArrayList<Application> applicationList = new ArrayList<Application>();
+        //int appid = 0;
+        //for (String app : appIDs) {
+        //    appid = Integer.parseInt(app);
+        //    applicationList.add(ApplicationDAO.retrieveByAppID(appid));
+        //}
         
-         //protect servlet
-         //protect servlet
-            HttpSession session = request.getSession();
-            Admin loggedInAdmin = (Admin) session.getAttribute("admin");
-
-            //to send back error messages if any
-            RequestDispatcher rd = request.getRequestDispatcher("edit.jsp");
-
-            //check if admin is logged in
-            if (loggedInAdmin == null) {
-                response.sendRedirect("login.jsp");
-                return;
-            }
-
-            //retrieve form parameters
-            String jobIDstr = request.getParameter("jobID");
-            
-            
-            int jobID = Integer.parseInt(jobIDstr);
-        
-        //update job
-        JobDAO.delete(jobID);
-
-        //redirect user
-        response.sendRedirect("viewJobs.jsp");
-        
+        //redirect admin to home page
+        response.sendRedirect("updateStatus.jsp?id=" + jobID);
+        //session.setAttribute("updatedFilteredUsers", applicationList);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
