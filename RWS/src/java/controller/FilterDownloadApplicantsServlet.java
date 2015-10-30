@@ -30,8 +30,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author ng_po_000
  */
-@WebServlet(name = "FilterUpdateApplicantsServlet", urlPatterns = {"/filterUpdateApplicants.do"})
-public class FilterUpdateApplicantsServlet extends HttpServlet {
+@WebServlet(name = "FilterDownloadApplicantsServlet", urlPatterns = {"/filterDownloadApplicants.do"})
+public class FilterDownloadApplicantsServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -64,7 +64,7 @@ public class FilterUpdateApplicantsServlet extends HttpServlet {
         String ageTo = request.getParameter("ageTo");
 
         //to send back messages 
-        RequestDispatcher rd = request.getRequestDispatcher("filterForUpdate.jsp?id=" + jobID);
+        RequestDispatcher rd = request.getRequestDispatcher("filterForDownload.jsp?id=" + jobID);
 
         //check if parameters are filled up
         if (statuses == null) {
@@ -170,7 +170,7 @@ public class FilterUpdateApplicantsServlet extends HttpServlet {
         }
         
         //redirect admin back to filtered Applicant table
-        response.sendRedirect("updateStatus.jsp?id=" + jobID);
+        response.sendRedirect("downloadCV.jsp?id=" + jobID);
 
     }
 

@@ -37,6 +37,13 @@
                             <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-user"></i>&nbsp; Admin <span class="caret"></span></a>
                             <ul id="g-account-menu" class="dropdown-menu" role="menu">
                                 <li><a href="#">View Profile</a></li>
+                                    <%                                      if (loggedInAdmin.getRole().equals("Manager")) {
+                                    %>
+                                <li><a href="addAdmin.jsp">Add Administrators</a></li>
+                                <li><a href="removeAdmin.jsp">Remove Administrators</a></li>
+                                    <%
+                                        }
+                                    %>
                             </ul>
                         </li>
                         <li data-toggle="modal" data-target="#logoutModal"><a style="cursor: pointer"><i class="glyphicon glyphicon-lock"></i>&nbsp; Logout</a></li>
@@ -69,16 +76,16 @@
                 <!-- Start of listing applicants -->
                 <div class="col-sm-9">
                     <ul class="nav nav-tabs">
-                       
+
                         <li class="active"><a data-toggle="tab" href="#menu1">Other Applications by <%=user.getFullname()%> &nbsp;<span class="badge badge-notify"><%=applicationList.size()%></span></a></li>
                     </ul>
                     <br>
                     <div class="tab-content">
-                       
+
                         <div id="menu1" class="tab-pane fade in active">
                             <div class="text-right">
 
-                               <button id="changeStatus-button" disabled="disabled" data-toggle="modal" data-target="#statusChangeModal" type="button" class="btn btn-success" style="margin-bottom: 10px;">Change Status &nbsp;<i class="fa fa-edit"></i></button>
+                                <button id="changeStatus-button" disabled="disabled" data-toggle="modal" data-target="#statusChangeModal" type="button" class="btn btn-success" style="margin-bottom: 10px;">Change Status &nbsp;<i class="fa fa-edit"></i></button>
                             </div>
                             <div>
                                 <form action="changeStatus2.do" method="post">
@@ -95,7 +102,7 @@
                                                 <th>Job</th>
                                                 <th>Date Applied</th>
                                                 <th>Status</th>
-                                                 <th><button id="select-all" type="button" class="btn-xs" >Select All &nbsp;<i class="fa fa-check"></i></button></th>
+                                                <th><button id="select-all" type="button" class="btn-xs" >Select All &nbsp;<i class="fa fa-check"></i></button></th>
                                             </tr>
                                         </thead>
                                         <tbody>

@@ -1,3 +1,4 @@
+<%@page import="dao.ApplicationDAO"%>
 <%@page import="entity.Job"%>
 <%@page import="dao.JobDAO"%>
 <%@page import="java.util.TimeZone"%>
@@ -38,6 +39,13 @@
                         <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-user"></i>&nbsp; Admin <span class="caret"></span></a>
                         <ul id="g-account-menu" class="dropdown-menu" role="menu">
                             <li><a href="#">My Profile</a></li>
+                                <%                                  if (loggedInAdmin.getRole().equals("Manager")) {
+                                %>
+                            <li><a href="addAdmin.jsp">Add Administrators</a></li>
+                            <li><a href="removeAdmin.jsp">Remove Administrators</a></li>
+                                <%
+                                    }
+                                %>
                         </ul>
                     </li>
                     <li data-toggle="modal" data-target="#logoutModal"><a style="cursor: pointer"><i class="glyphicon glyphicon-lock"></i>&nbsp; Logout</a></li>
@@ -101,19 +109,14 @@
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Created By</label>
                                 <div class="col-sm-8">
-                                    <input style="background-color: lightgoldenrodyellow; cursor: not-allowed;" type="text" name="createdBy" class="form-control" value="<%=loggedInAdmin.getId()%>" readonly=readonly>
+                                    <input style="background-color: lightgoldenrodyellow; cursor: not-allowed;" type="text" name="createdBy" class="form-control" value="<%=job.getCreatedBy()%>" readonly=readonly>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Created On</label>
                                 <div class="col-sm-8">
-                                    <%
-                                        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                                        dateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Singapore"));
-                                        Date date = new Date();
-                                        String today = dateFormat.format(date);
-                                    %>
-                                    <input style="background-color: lightgoldenrodyellow; cursor: not-allowed;" type="text" name="createdOn" class="form-control" value="<%=today%>" readonly=readonly>
+
+                                    <input style="background-color: lightgoldenrodyellow; cursor: not-allowed;" type="text" name="createdOn" class="form-control" value="<%=job.getCreatedOn()%>" readonly=readonly>
                                 </div>
                             </div>    
                             <div class="form-group">
@@ -160,7 +163,7 @@
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Validity</label>
                                 <div class="col-sm-8">
-                                    <input data-format="yyyy-MM-dd" type='text' class="form-control" id='datetimepicker4' name="validity" value="<%=job.getValidity()%>" />
+                                    <input data-format="dd-MM-yyyy" type='text' class="form-control" id='datetimepicker4' name="validity" value="<%=job.getValidity()%>" />
                                 </div>
                             </div>
 
@@ -182,8 +185,16 @@
                         </div>
                     </div>
                     <button data-toggle="modal" data-target="#editModal" type="button" style="float:right;" class="btn btn-success btn-lg">Apply Changes    <i class="fa fa-chevron-circle-right"></i></button>
-
+                        <%
+                            if (job.getCreatedBy().equals(loggedInAdmin.getId())) {
+                        %>
                     <button data-toggle="modal" data-target="#deleteModal" type="button" style="float:right;margin: 0px 10px 10px 0px;" class="btn btn-danger btn-lg">Delete    <i class="fa fa-trash"></i></button>
+                        <%
+                        } else {
+                        %>
+                    <button data-toggle="modal" data-target="#deleteModal" type="button" style="float:right;margin: 0px 10px 10px 0px;" class="btn btn-danger btn-lg" disabled>Delete    <i class="fa fa-trash"></i></button>
+                        <%}
+                        %>
                     <a class="btn btn-success btn-lg" href="viewJobs.jsp?id=<%=jobId%>" role="button"> <i class="fa fa-chevron-circle-left"></i>    Back</a>                                                
                     <input type="hidden" name="jobID" value="<%=jobId%>">
 
@@ -211,7 +222,21 @@
 
 <form class="form-horizontal" action="delete.do" method="post">
     <input type="hidden" name="jobID" value="<%=jobId%>">
-    <%@include file = "deleteModal.jsp"%>
+    <div class="modal fade" id="deleteModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>Are you sure you want to delete? This job posting has currently <%=ApplicationDAO.retrieveByJobID(jobId).size()%> applications. </p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </form>
 </div>

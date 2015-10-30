@@ -1,6 +1,3 @@
-<%@page import="dao.ApplicationDAO"%>
-<%@page import="entity.Application"%>
-<%@page import="java.util.ArrayList"%>
 <%@page import="entity.Job"%>
 <%@page import="dao.JobDAO"%>
 <%@page import="java.util.TimeZone"%>
@@ -29,7 +26,7 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>b
+                    <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
@@ -41,7 +38,7 @@
                         <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-user"></i>&nbsp; Admin <span class="caret"></span></a>
                         <ul id="g-account-menu" class="dropdown-menu" role="menu">
                             <li><a href="#">My Profile</a></li>
-                                <%                                  if (loggedInAdmin.getRole().equals("Manager")) {
+                                <%                                if (loggedInAdmin.getRole().equals("Manager")) {
                                 %>
                             <li><a href="addAdmin.jsp">Add Administrators</a></li>
                             <li><a href="removeAdmin.jsp">Remove Administrators</a></li>
@@ -57,10 +54,6 @@
         <!-- /container -->
     </div>
     <!-- /Header -->
-    <%
-        int jobId = Integer.parseInt(request.getParameter("id"));
-
-    %>
 
     <!-- Main -->
     <div class="container-fluid">
@@ -78,77 +71,56 @@
                 </ul>
             </div>  
             <div class="col-sm-9">
-                <form class="form-horizontal" action="filterUpdateApplicants.do" method="post">
+                <form class="form-horizontal" action="addAdmin.do" method="post">
                     <div class="col-sm-12">
                         <div class="col-sm-12 well text-center">
-                            <h1 style="margin-bottom: 40px;">Filter Applicants</h1>
+                            
+                            <h1 style="margin-bottom: 40px;">Add Staff Admin</h1>
                             <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Admin Name</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" name="adminName" class="form-control">
+                                    </div>
+                                </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">Nationality</label>
-                                    <div class="col-sm-4">
-                                        <select name="nationality" class="form-control">
-                                            <option value="All">All</option>
-                                            <option value="SGP">Singapore Citizen</option>
-                                            <option value="PR">Permanent Resident</option>
-                                            <option value="Others">Non-Singaporean</option>
+                                    <label class="col-sm-3 control-label">Admin ID<font color ="red"> *</font></label>
+                                    <div class="col-sm-6">
+                                        <input type="text" name="adminID" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Admin Password<font color ="red"> *</font></label>
+                                    <div class="col-sm-6">
+                                        <input type="text" name="adminPassword" class="form-control">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Admin Email</label>
+                                    <div class="col-sm-6">
+                                    <input type="text" name="adminEmail" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Admin Role<font color ="red"> *</font></label>
+                                    <div class="col-sm-6">
+                                        <select name="adminRole" class="form-control">
+                                            <option value="Admin">Admin</option>
+                                            <option value="Manager">Manager</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Gender</label>
-                                    <div class="col-sm-4">
-                                        <select name="gender" class="form-control">
-                                            <option value="Any">Any</option>
-                                            <option value="Female">Female</option>
-                                            <option value="Male">Male</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Status</label>
-                                    <div class="col-sm-3">
 
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" name="status" checked="checked" value="Pending"/> Pending </label>
-                                            <label><input type="checkbox" name="status" checked="checked" value="Reviewed"/> Reviewed </label>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Date Applied From</label>
-                                    <div class="col-sm-4">
-                                        <input data-format="yyyy-MM-dd" type='text' class="form-control" id='datetimepicker4' name="dateAppliedFrom" />
-                                    </div>
-                                </div> 
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Date Applied To</label>
-                                    <div class="col-sm-4">
-                                        <input data-format="yyyy-MM-dd" type='text' class="form-control" id='datetimepicker3' name="dateAppliedTo" />
-
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Age From</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="ageFrom" class="form-control">
-                                    </div>
-                                </div>  
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Age To</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" name="ageTo" class="form-control">
-                                    </div>
-                                </div>  
                             </div>
-
                         </div>
-                        <input type="hidden" name="jobId" value="<%=jobId%>">
-                        <button data-toggle="modal" data-target="#applyFiltersModal" type="button" style="float:right;" class="btn btn-success btn-lg">Apply <i class="fa fa-chevron-circle-right"></i></button>
+                        <button data-toggle="modal" data-target="#createModal" type="button" style="float:right;" class="btn btn-success btn-lg">Add <i class="fa fa-chevron-circle-right"></i></button>
                         <!--Print errors here-->
-                        <%                            String errorMsg = (String) request.getAttribute("errorMsg");
+                        <%
+                            String errorMsg = (String) request.getAttribute("errorMsg");
 
                             if (errorMsg != null) {
                         %>
@@ -165,7 +137,7 @@
     </div>
 </div>
 
-<%@include file = "applyFiltersModal.jsp"%>
+<%@include file = "createModal.jsp"%>
 </form>
 </div>
 </div>

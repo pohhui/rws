@@ -33,6 +33,13 @@
                             <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-user"></i>&nbsp; Admin <span class="caret"></span></a>
                             <ul id="g-account-menu" class="dropdown-menu" role="menu">
                                 <li><a href="#">View Profile</a></li>
+                                    <%                                      if (loggedInAdmin.getRole().equals("Manager")) {
+                                    %>
+                                <li><a href="addAdmin.jsp">Add Administrators</a></li>
+                                <li><a href="removeAdmin.jsp">Remove Administrators</a></li>
+                                    <%
+                                        }
+                                    %>
                             </ul>
                         </li>
                         <li data-toggle="modal" data-target="#logoutModal"><a style="cursor: pointer"><i class="glyphicon glyphicon-lock"></i>&nbsp; Logout</a></li>
@@ -76,8 +83,8 @@
                                         <th>Location</th>
                                         <th>Created On</th>
                                         <th>Status</th>
-                                        <th>Download</th>
-                                        <th>Update</th>
+                                        <th>Download CVs</th>
+                                        <th>Review Applicants</th>
 
                                     </tr>
                                 </thead>
@@ -97,8 +104,8 @@
                                         <td><%=job.getLocation()%></td>
                                         <td><%=job.getCreatedOn()%></td>  
                                         <td><%=job.getStatusCode()%></td>
-                                        <td class="text-center"><a href="viewJob.jsp?id=<%=job.getJobId()%>"> <button class="btn btn-default">Download</button></a></td>
-                                        <td class="text-center"><a href="filterForUpdate.jsp?id=<%=job.getJobId()%>"> <button class="btn btn-default">Update</button></a></td>
+                                        <td class="text-center"><a href="filterForDownload.jsp?id=<%=job.getJobId()%>"> <button class="btn btn-default">Download</button></a></td>
+                                        <td class="text-center"><a href="filterForUpdate.jsp?id=<%=job.getJobId()%>"> <button class="btn btn-default">Review</button></a></td>
                                     </tr>
 
                                     <%
@@ -120,8 +127,8 @@
                                         <th>Location</th>
                                         <th>Created On</th>
                                         <th>Status</th>
-                                        <th>Download</th>
-                                        <th>Update</th>
+                                        <th>Download CVs</th>
+                                        <th>Review Applicants</th>
 
                                     </tr>
                                 </thead>
@@ -132,14 +139,14 @@
                                             Job jobs = allJobs.get(i);
                                     %>   
                                     <tr>
-                                         <td><%=jobs.getJobId()%></td>
+                                        <td><%=jobs.getJobId()%></td>
                                         <td><a href="viewJob.jsp?id=<%=jobs.getJobId()%>"</a><%=jobs.getPostingTitle()%></td>                                        
                                         <td><%=jobs.getBusinessUnit()%></td>
                                         <td><%=jobs.getLocation()%></td>
                                         <td><%=jobs.getCreatedOn()%></td>  
                                         <td><%=jobs.getStatusCode()%></td>
-                                        <td class="text-center"><a href="viewJob.jsp?id=<%=jobs.getJobId()%>"> <button class="btn btn-default">Download</button></a></td>
-                                        <td class="text-center"><a href="filterForUpdate.jsp?id=<%=jobs.getJobId()%>"> <button class="btn btn-default">Update</button></a></td>
+                                        <td class="text-center"><a href="filterForDownload.jsp?id=<%=jobs.getJobId()%>"> <button class="btn btn-default">Download</button></a></td>
+                                        <td class="text-center"><a href="filterForUpdate.jsp?id=<%=jobs.getJobId()%>"> <button class="btn btn-default">Review</button></a></td>
                                     </tr>   
 
                                     <%

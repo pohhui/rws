@@ -37,6 +37,13 @@
                             <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-user"></i>&nbsp; Admin <span class="caret"></span></a>
                             <ul id="g-account-menu" class="dropdown-menu" role="menu">
                                 <li><a href="#">View Profile</a></li>
+                                    <%                                      if (loggedInAdmin.getRole().equals("Manager")) {
+                                    %>
+                                <li><a href="addAdmin.jsp">Add Administrators</a></li>
+                                <li><a href="removeAdmin.jsp">Remove Administrators</a></li>
+                                    <%
+                                        }
+                                    %>
                             </ul>
                         </li>
                         <li data-toggle="modal" data-target="#logoutModal"><a style="cursor: pointer"><i class="glyphicon glyphicon-lock"></i>&nbsp; Logout</a></li>
@@ -108,7 +115,7 @@
 
                         <div id="menu1" class="tab-pane fade">
                             <div class="text-right">
-                                <td class="text-center"><a href="viewJob.jsp?"> <button class="btn btn-success" style="margin-bottom: 10px;">Download &nbsp;<i class="fa fa-download"></i></button></a></td>
+                                <td class="text-center"><a href="viewApplicantDownload.jsp?username=<%=user.getUsername()%>"> <button class="btn btn-success" style="margin-bottom: 10px;">Download &nbsp;<i class="fa fa-download"></i></button></a></td>
                                 <td class="text-center"><a href="viewApplicantUpdate.jsp?username=<%=user.getUsername()%>"> <button class="btn btn-success" style="margin-bottom: 10px;">Update &nbsp;<i class="fa fa-edit"></i></button></a></td>
                             </div>
                             <div>
@@ -149,7 +156,7 @@
                                     </table> 
 
                                     <input type="hidden" name="username" value="<%=username%>">
-                                    
+
                                     <%@include file = "downloadCVModal.jsp"%>
                                     <%@include file = "changeStatusModal.jsp"%>
                                 </form>               

@@ -8,10 +8,8 @@
                     <label>Change selected application(s) to:</label>
                     <div>
                         <select name="status" class="form-control">
-                            <option value="Submitted">Submitted</option>
+                            <option value="Pending">Pending</option>
                             <option value="Reviewed" >Reviewed</option>
-                            <option value="Confirmed">Confirmed</option>
-                            <option value="Rejected">Rejected</option>
                         </select>
                     </div>
                 </div>

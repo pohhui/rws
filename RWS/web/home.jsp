@@ -29,6 +29,14 @@
                             <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-user"></i>&nbsp; Admin <span class="caret"></span></a>
                             <ul id="g-account-menu" class="dropdown-menu" role="menu">
                                 <li><a href="#">View Profile</a></li>
+                                <%
+                                    if (loggedInAdmin.getRole().equals("Manager")){
+                                %>
+                                    <li><a href="addAdmin.jsp">Add Administrators</a></li>
+                                    <li><a href="removeAdmin.jsp">Remove Administrators</a></li>
+                                <%
+                                    }
+                                %>
                             </ul>
                         </li>
                         <li data-toggle="modal" data-target="#logoutModal"><a style="cursor: pointer"><i class="glyphicon glyphicon-lock"></i>&nbsp; Logout</a></li>
@@ -46,7 +54,7 @@
                     <ul class="nav nav-stacked">
                         <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#userMenu">Modules <i class="fa fa-chevron-down"></i></a>
                             <ul class="nav nav-stacked collapse in" id="userMenu">
-                                <li> <a href="home.jsp"><i class="glyphicon glyphicon-home"></i>&nbsp; Home</a></li>
+                                 <li> <a href="home.jsp"><i class="glyphicon glyphicon-home"></i>&nbsp; Home</a></li>
                                 <li> <a href="create.jsp"><i class="glyphicon glyphicon-plus"></i>&nbsp; Create Job</a></li>
                                 <li><a href="viewJobs.jsp"><i class="glyphicon glyphicon-briefcase"></i>&nbsp; Manage Jobs </a></li>
                                 <li><a href="viewApplications.jsp"><i class="glyphicon glyphicon-file"></i>&nbsp; Manage Applications </a></li>
@@ -70,32 +78,14 @@
                             </div>
                             <!--/panel-->
                         </div>
-                        <div class="col-md-4">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4>Job Type</h4></div>
-                                <div class="panel-body">
-                                    <div class="chart-demo" style="margin-left: 30px; margin-top: 10px;">
-                                        <canvas id="radarChart" width="200" height="200"></canvas>
-                                    </div>
-                                </div>
-                                <!--/panel-body-->
-                            </div>
-                            <!--/panel-->
-                        </div>
-                        <div class="col-md-4">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4>Monthly Report</h4></div>
-                                <div class="panel-body">
-                                    <div class="chart-demo" style="margin-left: 30px; margin-top: 10px;">
-                                        <canvas id="barChart" width="200" height="200"></canvas>
-                                    </div>
-                                </div>
-                                <!--/panel-body-->
-                            </div>
-                            <!--/panel-->
-                        </div>
+                        <div id="js-legend" class="chart-legend"></div>
+                        <select id="businessUnit" class="form-control">
+                            <option>Choose one</option>
+                            <option>Attractions</option>
+                            <option>Casino</option>
+                            <option>F&B</option>
+                            <option>Rooms Business</option>
+                        </select>
                     </div>
                 </div>
             </div>

@@ -76,68 +76,24 @@
                 <!-- Start of listing applicants -->
                 <div class="col-sm-9">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#home">Applicant Details</a></li>
-                        <li><a data-toggle="tab" href="#menu1">Other Applications by Applicant &nbsp;<span class="badge badge-notify"><%=applicationList.size()%></span></a></li>
+
+                        <li class="active"><a data-toggle="tab" href="#menu1">Other Applications by <%=user.getFullname()%> &nbsp;<span class="badge badge-notify"><%=applicationList.size()%></span></a></li>
                     </ul>
                     <br>
                     <div class="tab-content">
-                        <div id="home" class="tab-pane fade in active">
-                            <div class="text-left">
-                                <div class="container-fluid">
 
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">Applicant Profile</div>
-                                        <div class="panel-body">
+                        <div id="menu1" class="tab-pane fade in active">
+                            <div class="text-right">
 
-                                            <div class="row">
-                                                <div class="col-md-6"><b>Full Name</b>: &nbsp; <%=user.getFullname()%></div>
-                                                <div class="col-md-6"><b>Email Address</b>: &nbsp; <%=user.getEmailAddress()%></div>
-                                            </div> 
-                                            <div class="row">
-                                                <div class="col-md-6"><b>Contact Number</b>: &nbsp; <%=user.getContactNo()%></div>
-                                                <div class="col-md-6"><b>NRIC Type</b>: &nbsp; <%=user.getNricType()%></div>
-                                            </div> 
-                                            <div class="row">
-                                                <div class="col-md-6"><b>NRIC Number</b>: &nbsp; <%=user.getNric()%></div>
-                                                <div class="col-md-6"><b>Date of Birth</b>: &nbsp; <%=user.getDob()%></div>
-                                            </div> 
-                                            <div class="row">
-                                                <div class="col-md-6"><b>Gender</b>: &nbsp; <%=user.getGender()%></div>
-                                                <div class="col-md-6"><b>Address</b>: &nbsp; <%=user.getBlkStreetUnit()%> &nbsp; <%=user.getPostalCode()%>  </div>
-                                            </div> 
-
-                                        </div>
-                                    </div>
-                                </div>
-
+                                <button id="download-button" disabled="disabled" data-toggle="modal" data-target="#downloadCVModal" type="button" class="btn btn-success" style="margin-bottom: 10px;">Download &nbsp;<i class="fa fa-download"></i></button>
                             </div>
-                        </div>
-
-                        <div id="menu1" class="tab-pane fade">
                             <div>
-                                <form action="changeStatus2.do" method="post">
+                                <form action="download.do" method="post">
                                     <%
                                         if (!applicationList.isEmpty()) {
-                                    %>
-                                    <%
-                                        if (!applicationList.isEmpty()) {
-                                    %>                                    
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="text-right">
-                                                <button id="select-all" type="button" class="btn btn-danger col-sm-offset-4" style="margin-bottom: 10px;">Select All &nbsp;<i class="fa fa-check"></i></button>
-                                                <button id="changeStatus-button" disabled="disabled" data-toggle="modal" data-target="#statusChangeModal" type="button" class="btn btn-success" style="margin-bottom: 10px;">Change Status &nbsp;<i class="fa fa-edit"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <%
+
                                         }
                                     %>
-                                    <%
-                                        }
-                                    %>
-
-
                                     <table class="table table-hover" id="applicationsTable" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
@@ -146,7 +102,7 @@
                                                 <th>Job</th>
                                                 <th>Date Applied</th>
                                                 <th>Status</th>
-                                                <th>Select</th>
+                                                <th><button id="select-all" type="button" class="btn-xs" >Select All &nbsp;<i class="fa fa-check"></i></button></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -161,7 +117,8 @@
                                                 <td><a href="viewJob.jsp?id=<%=job.getJobId()%>"</a><%=job.getPostingTitle()%></td>      
                                                 <td><%=app.getDateApplied()%></td> 
                                                 <td><%=app.getStatus()%></td> 
-                                                <td><input type="checkbox" name="changeStatus" value="<%=app.getAppID()%>"/></td>
+                                                <td><input type="checkbox" name="download" value="<%=app.getAppID()%>"/></td>
+
                                             </tr>
                                             <%
                                                 }

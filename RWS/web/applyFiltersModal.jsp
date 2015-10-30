@@ -1,10 +1,10 @@
-<!--Edit Modal-->
-<div class="modal fade" id="editModal" role="dialog">
+<!--Create Job Modal-->
+<div class="modal fade" id="applyFiltersModal" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-body">
-                <p>Are you sure you want to proceed?</p> 
+                <p>Apply filters to applicants?</p>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary">Yes</button>

@@ -1,3 +1,4 @@
+<%@page import="dao.AdminDAO"%>
 <%@page import="dao.ApplicationDAO"%>
 <%@page import="entity.Application"%>
 <%@page import="java.util.ArrayList"%>
@@ -35,7 +36,7 @@
                             <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-user"></i>&nbsp; Admin <span class="caret"></span></a>
                             <ul id="g-account-menu" class="dropdown-menu" role="menu">
                                 <li><a href="#">View Profile</a></li>
-                                    <%                                      if (loggedInAdmin.getRole().equals("Manager")) {
+                                    <%                                if (loggedInAdmin.getRole().equals("Manager")) {
                                     %>
                                 <li><a href="addAdmin.jsp">Add Administrators</a></li>
                                 <li><a href="removeAdmin.jsp">Remove Administrators</a></li>
@@ -52,7 +53,7 @@
         </div>
         <!-- /Header -->
 
-        <%            ArrayList<Application> applicationList = ApplicationDAO.retrieveAll();
+        <%            ArrayList<Admin> adminList = AdminDAO.retrieveAll();
         %>
 
         <!-- Main -->
@@ -76,45 +77,36 @@
                         <table id="example" class="display" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                    <th>Applicant</th>
-                                    <th>Date of Birth</th>
-                                    <th>Nationality</th>
-                                    <th>Gender</th>
-                                    <th>Postal Code</th>
-                                    <th>Date Applied</th>
-                                    <th>Job ID</th >
-                                    <th>Job Applied</th >
-                                    <th>Status</th>
+                                    <th>Admin Name</th>
+                                    <th>Admin ID</th>
+                                    <th>Admin Role</th>
+                                    <th>Action</th>
 
                                 </tr>
                             </thead>
                             <tbody>
                                 <%
-                                    for (int i = 0; i < applicationList.size(); i++) {
-                                        Application app = applicationList.get(i);
+                                    for (int i = 0; i < adminList.size(); i++) {
+                                        Admin admin = adminList.get(i);
+                                     
                                 %>   
                                 <tr>
-                                    <td> <p><a href="viewApplicant.jsp?username=<%=app.getUsername()%>"><%=app.getFullname()%></a></p></td>
-                                    <td><%=app.getDob()%></td>
-                                    <td><%=app.getNricType()%></td>
-                                    <td><%=app.getGender()%></td> 
-                                    <td><%=app.getPostalCode()%></td> 
-                                    <td><%=app.getDateApplied()%></td>
-                                    <td><%=app.getJobID()%></td>
-                                    <td><%=app.getPostingTitle()%></td>
-                                    <td><%=app.getStatus()%></td> 
+                            <form action="removeAdmin.do" method="post">
+                                <td><%=admin.getName()%></td>
+                                <td><%=admin.getId()%></td>
+                                <td><%=admin.getRole()%></td>
 
+                                <input type="hidden" name="id" value="<%=admin.getId()%>">
+                                <td><button type="submit" class="btn btn-primary">Remove</button></td>
+                            </form>
 
-                                </tr>
-                                <%
-                                    }
-                                %>
+                            </tr>
+                            <%
+                                }
+                            %>
                             </tbody>
                         </table>
                     </div>
-
-
-
 
                 </div>
             </div>

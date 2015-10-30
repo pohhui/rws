@@ -57,8 +57,7 @@
         <!-- /container -->
     </div>
     <!-- /Header -->
-    <%
-        int jobId = Integer.parseInt(request.getParameter("id"));
+    <%         int jobId = Integer.parseInt(request.getParameter("id"));
 
     %>
 
@@ -78,7 +77,7 @@
                 </ul>
             </div>  
             <div class="col-sm-9">
-                <form class="form-horizontal" action="filterUpdateApplicants.do" method="post">
+                <form class="form-horizontal" action="filterDownloadApplicants.do" method="post">
                     <div class="col-sm-12">
                         <div class="col-sm-12 well text-center">
                             <h1 style="margin-bottom: 40px;">Filter Applicants</h1>

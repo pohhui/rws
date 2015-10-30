@@ -1,111 +1,3 @@
-$.ajax({
-    type: 'Get',
-    url: 'http://localhost:8084/RESToutJSON/rest/getUserListService',
-    success: function (data) {
-        
-    }
-})
-
-// Radar Chart Options
-var radarOptions = {
-    //Boolean - If we show the scale above the chart data			
-    scaleOverlay: false,
-    //Boolean - If we want to override with a hard coded scale
-    scaleOverride: false,
-    //** Required if scaleOverride is true **
-    //Number - The number of steps in a hard coded scale
-    scaleSteps: null,
-    //Number - The value jump in the hard coded scale
-    scaleStepWidth: null,
-    //Number - The centre starting value
-    scaleStartValue: null,
-    //Boolean - Whether to show lines for each scale point
-    scaleShowLine: true,
-    //String - Colour of the scale line	
-    scaleLineColor: "#999",
-    //Number - Pixel width of the scale line	
-    scaleLineWidth: 1,
-    //Boolean - Whether to show labels on the scale	
-    scaleShowLabels: false,
-    //Interpolated JS string - can access value
-    scaleLabel: "<%=value%>",
-    //String - Scale label font declaration for the scale label
-    scaleFontFamily: "'Arial'",
-    //Number - Scale label font size in pixels	
-    scaleFontSize: 12,
-    //String - Scale label font weight style	
-    scaleFontStyle: "normal",
-    //String - Scale label font colour	
-    scaleFontColor: "#666",
-    //Boolean - Show a backdrop to the scale label
-    scaleShowLabelBackdrop: true,
-    //String - The colour of the label backdrop	
-    scaleBackdropColor: "rgba(255,255,255,0.75)",
-    //Number - The backdrop padding above & below the label in pixels
-    scaleBackdropPaddingY: 2,
-    //Number - The backdrop padding to the side of the label in pixels	
-    scaleBackdropPaddingX: 2,
-    //Boolean - Whether we show the angle lines out of the radar
-    angleShowLineOut: true,
-    //String - Colour of the angle line
-    angleLineColor: "rgba(255,255,255,0.3)",
-    //Number - Pixel width of the angle line
-    angleLineWidth: 1,
-    //String - Point label font declaration
-    pointLabelFontFamily: "'Arial'",
-    //String - Point label font weight
-    pointLabelFontStyle: "normal",
-    //Number - Point label font size in pixels	
-    pointLabelFontSize: 12,
-    //String - Point label font colour	
-    pointLabelFontColor: "#EFEFEF",
-    //Boolean - Whether to show a dot for each point
-    pointDot: true,
-    //Number - Radius of each point dot in pixels
-    pointDotRadius: 3,
-    //Number - Pixel width of point dot stroke
-    pointDotStrokeWidth: 1,
-    //Boolean - Whether to show a stroke for datasets
-    datasetStroke: true,
-    //Number - Pixel width of dataset stroke
-    datasetStrokeWidth: 1,
-    //Boolean - Whether to fill the dataset with a colour
-    datasetFill: true,
-    //Boolean - Whether to animate the chart
-    animation: true,
-    //Number - Number of animation steps
-    animationSteps: 60,
-    //String - Animation easing effect
-    animationEasing: "easeOutQuart",
-    //Function - Fires when the animation is complete
-    onAnimationComplete: null
-
-};
-
-// Radar Data
-var radarData = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
-    datasets: [
-        {
-            fillColor: "rgba(220,220,220,0.5)",
-            strokeColor: "rgba(220,220,220,1)",
-            data: [65, 59, 90, 81, 56, 55, 40]
-        },
-        {
-            fillColor: "rgba(151,187,205,0.5)",
-            strokeColor: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 96, 27, 100]
-        }
-    ]
-};
-
-
-//Get the context of the Radar Chart canvas element we want to select
-var ctx = document.getElementById("radarChart").getContext("2d");
-
-// Create the Radar Chart
-var myRadarChart = new Chart(ctx).Radar(radarData, radarOptions);
-
 // Doughnut Chart Options
 var doughnutOptions = {
     //Boolean - Whether we should show a stroke on each segment
@@ -130,91 +22,35 @@ var doughnutOptions = {
     onAnimationComplete: null
 };
 
+$('#businessUnit').on('change', function () {
+    var businessUnit = this.value;
 
-// Doughnut Chart Data
-var doughnutData = [
-    {
-        value: 30,
-        color: "white"
-    },
-    {
-        value: 50,
-        color: "#1789D4"
-    },
-    {
-        value: 100,
-        color: "#CB4B16"
-    },
-    {
-        value: 40,
-        color: "#1F8261"
-    },
-    {
-        value: 120,
-        color: "#FFA500"
+    if (businessUnit !== 'Choose one') {
+        $.getJSON("http://localhost:8084/RESToutJSON/rest/getStatusBreakdownByBusinessUnit/" + businessUnit, function (response) {
+               console.log(response);       
+            var doughnutData = [
+                {
+                    value: response.pending,
+                    label: 'Pending',
+                    color: "#00aedb"
+                },
+                {
+                    value: response.reviewed,
+                    label: 'Reviewed',
+                    color: "#f37735"
+                },
+            ];
+            
+            $('#doughnutChart').replaceWith('<canvas id="doughnutChart" width="200" height="200"></canvas>');
+
+            //Get the context of the Doughnut Chart canvas element we want to select
+            var ctx = document.getElementById("doughnutChart").getContext("2d");
+
+            // Create the Doughnut Chart
+            var mydoughnutChart = new Chart(ctx).Doughnut(doughnutData, doughnutOptions);
+            
+            document.getElementById('js-legend').innerHTML = mydoughnutChart.generateLegend();
+        });
     }
+});
 
-];
-
-
-//Get the context of the Doughnut Chart canvas element we want to select
-var ctx = document.getElementById("doughnutChart").getContext("2d");
-
-// Create the Doughnut Chart
-var mydoughnutChart = new Chart(ctx).Doughnut(doughnutData, doughnutOptions);
-
-//Bar chart options
-var barOptions = {
-    //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
-    scaleBeginAtZero: true,
-    //Boolean - Whether grid lines are shown across the chart
-    scaleShowGridLines: true,
-    //String - Colour of the grid lines
-    scaleGridLineColor: "rgba(0,0,0,.05)",
-    //Number - Width of the grid lines
-    scaleGridLineWidth: 1,
-    //Boolean - Whether to show horizontal lines (except X axis)
-    scaleShowHorizontalLines: true,
-    //Boolean - Whether to show vertical lines (except Y axis)
-    scaleShowVerticalLines: true,
-    //Boolean - If there is a stroke on each bar
-    barShowStroke: true,
-    //Number - Pixel width of the bar stroke
-    barStrokeWidth: 2,
-    //Number - Spacing between each of the X value sets
-    barValueSpacing: 5,
-    //Number - Spacing between data sets within X values
-    barDatasetSpacing: 1,
-    //String - A legend template
-    legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
-
-};
-
-//bar chart data
-var barData = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
-    datasets: [
-        {
-            label: "My First dataset",
-            fillColor: "rgba(220,220,220,0.5)",
-            strokeColor: "rgba(220,220,220,0.8)",
-            highlightFill: "rgba(220,220,220,0.75)",
-            highlightStroke: "rgba(220,220,220,1)",
-            data: [65, 59, 80, 81, 56, 55, 40]
-        },
-        {
-            label: "My Second dataset",
-            fillColor: "rgba(151,187,205,0.5)",
-            strokeColor: "rgba(151,187,205,0.8)",
-            highlightFill: "rgba(151,187,205,0.75)",
-            highlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86, 27, 90]
-        }
-    ]
-};
-
-//Get the context of the Doughnut Chart canvas element we want to select
-var ctx = document.getElementById("barChart").getContext("2d");
-
-// Create the Doughnut Chart
-var myBarChart = new Chart(ctx).Bar(barData, barOptions);

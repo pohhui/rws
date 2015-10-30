@@ -81,7 +81,7 @@
                 <!-- Start of listing applicants -->
                 <div class="col-sm-9">
                     <div>
-                        <form action="updateStatus.do" method="post">
+                        <form action="download.do" method="post">
                             <%
                                 if (!applicationList.isEmpty()) {
                             %>                                    
@@ -90,7 +90,7 @@
                                     <div class="text-right">
 
 
-                                        <button id="changeStatus-button" disabled="disabled" data-toggle="modal" data-target="#statusChangeModal" type="button" class="btn btn-success" style="margin-bottom: 10px;">Change Status &nbsp;<i class="fa fa-edit"></i></button>
+                                        <button id="download-button" disabled="disabled" data-toggle="modal" data-target="#downloadCVModal" type="button" class="btn btn-success" style="margin-bottom: 10px;">Download &nbsp;<i class="fa fa-download"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -126,7 +126,7 @@
                                         <td><%=app.getDateApplied()%></td> 
                                         <td><%=app.getStatus()%></td> 
 
-                                        <td><input type="checkbox" name="changeStatus" value="<%=app.getAppID()%>"/></td>
+                                        <td><input type="checkbox" name="download" value="<%=app.getAppID()%>"/></td>
                                     </tr>
                                     <%
                                         }
@@ -147,7 +147,7 @@
                             %>
                             <input type="hidden" name="jobID" value="<%=jobId%>">
 
-                            <%@include file = "changeStatusModal.jsp"%>
+                            <%@include file = "downloadCVModal.jsp"%>
                         </form>                            
                     </div>
 
